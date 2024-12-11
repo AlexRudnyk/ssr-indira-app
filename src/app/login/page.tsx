@@ -1,7 +1,8 @@
 "use client";
 
-import axiosInstance from "@/api/axiosInstance";
 import { Field, Form, Formik } from "formik";
+
+import axiosInstance from "@/api/axiosInstance";
 
 type InitValues = {
   email: string;

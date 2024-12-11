@@ -1,7 +1,8 @@
-import { storageKeys } from "@/helpers/storageKeys";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
+
+import { storageKeys } from "@/helpers/storageKeys";
 
 const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_DOMAIN,

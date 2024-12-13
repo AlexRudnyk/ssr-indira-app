@@ -2,7 +2,14 @@ import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["localhost", "res.cloudinary.com"]
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "res.cloudinary.com",
+        port: "",
+        pathname: "/dxkrodhon/**"
+      }
+    ]
   }
 }
 

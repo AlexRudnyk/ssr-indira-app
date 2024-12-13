@@ -1,0 +1,28 @@
+@use "../../mixins/mixins.scss" as m;
+
+.container {
+  @include m.container();
+
+  & {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+}
+
+.logoWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.logoBrand {
+  position: absolute;
+  top: 30px;
+  left: 20px;
+  font-size: 48px;
+  @include m.brandFont();
+}
+
+.logoIcon {
+  opacity: 0.6;
+}

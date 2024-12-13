@@ -1,5 +1,6 @@
 "use client"
 
+import { CircularProgress } from "@mui/material"
 import { useQuery } from "@tanstack/react-query"
 import Image from "next/image"
 
@@ -20,7 +21,7 @@ const ProductsList = () => {
   return (
     <div className={s.container}>
       {isPending ? (
-        <div>Loading...</div>
+        <CircularProgress />
       ) : (
         <ul>
           {products.map((product: { _id: string; title: string; photoURL: string }) => (

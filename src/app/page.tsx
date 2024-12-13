@@ -1,40 +1,20 @@
-"use client";
+import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query"
 
-import axios from "axios";
-import { Field, Form, Formik } from "formik";
+import ProductsList from "@/components/ProductsList"
 
-type InitValues = {
-  name: string;
-  phone: string;
-  email: string;
-  password: string;
-};
+import { getProducts } from "@/utils/getProducts"
 
-export default function Home() {
-  const initialValues: InitValues = {
-    name: "",
-    phone: "",
-    email: "",
-    password: "",
-  };
+export default async function Home() {
+  const queryClient = new QueryClient()
 
-  const handleSubmit = (values: InitValues) => {
-    try {
-      axios.post("http://localhost:3001/api/auth/register", values);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  await queryClient.prefetchQuery({
+    queryKey: ["products"],
+    queryFn: getProducts
+  })
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-      <Form>
-        <Field name="name" placeholder="Enter your name" />
-        <Field name="phone" placeholder="Enter your phone" />
-        <Field name="email" placeholder="Enter your email" />
-        <Field name="password" placeholder="Enter your password" />
-        <button type="submit">Submit</button>
-      </Form>
-    </Formik>
-  );
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <ProductsList />
+    </HydrationBoundary>
+  )
 }

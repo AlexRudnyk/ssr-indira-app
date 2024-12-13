@@ -2,6 +2,8 @@ import type { Metadata } from "next"
 
 import Providers from "./providers"
 
+import { GlobalContextProvider } from "@/context/store"
+
 // import { Geist, Geist_Mono } from "next/font/google";
 
 // import "./globals.css";
@@ -30,7 +32,9 @@ export default function RootLayout({
     <html lang="en">
       {/* <body className={`${geistSans.variable} ${geistMono.variable}`}> */}
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <GlobalContextProvider>{children}</GlobalContextProvider>
+        </Providers>
       </body>
     </html>
   )

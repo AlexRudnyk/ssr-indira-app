@@ -5,6 +5,7 @@ export const getProducts = async () => {
     const { data } = await axiosInstance.get("products")
     return data
   } catch (error) {
-    console.log(error)
+    console.log("Error fetching products")
+    return []
   }
 }

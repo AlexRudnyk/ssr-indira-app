@@ -1,0 +1,18 @@
+@use "../../mixins/mixins.scss" as m;
+@use "../../styles/vars.scss" as v;
+
+.section {
+  border-top: 2px solid lightgrey;
+}
+
+.container {
+  @include m.container();
+}
+
+.brandTitle {
+  text-align: center;
+  color: v.$primary-color;
+  font-size: 64px;
+
+  @include m.brandFont();
+}

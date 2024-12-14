@@ -2,6 +2,7 @@ import cn from "classnames"
 import type { Metadata } from "next"
 import { Great_Vibes, Outfit, Red_Hat_Display } from "next/font/google"
 
+import Footer from "@/components/Footer"
 import Header from "@/components/Header"
 
 import Providers from "./providers"
@@ -43,6 +44,7 @@ export default function RootLayout({
           <GlobalContextProvider>
             <Header />
             <main>{children}</main>
+            <Footer />
           </GlobalContextProvider>
         </Providers>
       </body>

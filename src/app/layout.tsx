@@ -11,18 +11,18 @@ import "./globals.scss"
 
 import { GlobalContextProvider } from "@/context/store"
 
-export const greatVibes = Great_Vibes({
+const greatVibes = Great_Vibes({
   subsets: ["latin"],
   weight: "400",
   variable: "--great-vibes-font"
 })
 
-export const redHatDisplay = Red_Hat_Display({
+const redHatDisplay = Red_Hat_Display({
   subsets: ["latin"],
   variable: "--red-hat-display-font"
 })
 
-export const outfit = Outfit({
+const outfit = Outfit({
   subsets: ["latin"],
   variable: "--outfit-font"
 })

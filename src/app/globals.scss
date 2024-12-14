@@ -1,14 +1,8 @@
 @use "../mixins/mixins.scss" as m;
-@use "../styles/vars.scss";
-
-// :root {
-//   --great-vibes-font: var(--great-vibes-font);
-//   --red-hat-display-font: var(--red-hat-display-font);
-//   --outfit-font: var(--outfit-font);
-// }
+@use "../styles/vars.scss" as v;
 
 body {
-  //   margin-top: $headerHeight;
+  margin-top: v.$headerHeight;
   padding: 0;
   @include m.bodyFont();
   -webkit-font-smoothing: antialiased;

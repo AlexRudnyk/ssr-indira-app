@@ -1,47 +1,62 @@
 "use client"
 
-import { Field, Form, Formik } from "formik"
-import Cookies from "js-cookie"
+import Button from "@mui/material/Button"
+import { Form, Formik, FormikHelpers } from "formik"
+import Link from "next/link"
 
-import axiosInstance from "@/api/axiosInstance"
-import { useGlobalContext } from "@/context/store"
-import { storageKeys } from "@/helpers/storageKeys"
+import { CustomTextField } from "../CustomTextField/CustomTextField"
 
-type InitValues = {
-  email: string
-  password: string
-}
+import s from "./LoginForm.module.scss"
+
+import { initialFormValues } from "@/helpers/initialFormValues"
+// import { LoginSchema } from "../LoginSchema"
+import routes from "@/helpers/routes"
+import { LoginInitValues } from "@/types/initFormValuesTypes"
 
 const LoginForm = () => {
-  const { isLoggedIn, setIsLoggedIn } = useGlobalContext()
-
-  const initialValues: InitValues = {
-    email: "",
-    password: ""
+  const handleSubmit = async (
+    values: LoginInitValues,
+    { resetForm }: FormikHelpers<LoginInitValues>
+  ) => {
+    console.log("VALUES", values)
+    resetForm()
   }
-
-  const handleSubmit = async (values: InitValues) => {
-    try {
-      const { data } = await axiosInstance.post("/auth/login", values)
-      Cookies.set(storageKeys.access_token, data.accessToken, {
-        sameSite: "Strict"
-      })
-      setIsLoggedIn(true)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  console.log("ISLOGGEDIN", isLoggedIn)
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-      <Form>
-        <Field name="email" placeholder="Enter your email" />
-        <Field name="password" placeholder="Enter your password" />
-        <button type="submit">Submit</button>
-      </Form>
-    </Formik>
+    <div className={s.formWrapper}>
+      <Formik
+        initialValues={initialFormValues.login}
+        onSubmit={handleSubmit}
+        // validationSchema={LoginSchema()}
+      >
+        <Form className={s.form}>
+          <h2>Please Sign In</h2>
+          <CustomTextField
+            name="email"
+            id="outlined-basic"
+            label="Email"
+            variant="outlined"
+            type="email"
+          />
+          <CustomTextField
+            name="password"
+            id="outlined-basic"
+            label="Password"
+            variant="outlined"
+            type="password"
+          />
+
+          <Button variant="contained" type="submit">
+            Submit
+          </Button>
+          <div className={s.linkWrapper}>
+            <p>
+              Don&#39;t have account yet? <Link href={routes.register}>Sign Up</Link>
+            </p>
+          </div>
+        </Form>
+      </Formik>
+    </div>
   )
 }
 

@@ -1,0 +1,22 @@
+@use "../../mixins/mixins.scss" as m;
+@use "../../styles/vars.scss" as v;
+
+.logoWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.logoBrand {
+  position: absolute;
+  top: 30px;
+  left: 20px;
+  font-size: 48px;
+  color: v.$primary-color;
+  @include m.brandFont();
+}
+
+.logoIcon {
+  opacity: 0.6;
+}

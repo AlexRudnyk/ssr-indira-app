@@ -26,22 +26,3 @@
   align-items: center;
   justify-content: space-between;
 }
-
-.logoWrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.logoBrand {
-  position: absolute;
-  top: 30px;
-  left: 20px;
-  font-size: 48px;
-  color: v.$primary-color;
-  @include m.brandFont();
-}
-
-.logoIcon {
-  opacity: 0.6;
-}

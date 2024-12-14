@@ -2,35 +2,32 @@
 
 import { CircularProgress } from "@mui/material"
 import { useQuery } from "@tanstack/react-query"
-import Image from "next/image"
+
+import ProductItem from "../ProductItem"
 
 import s from "./ProductsList.module.scss"
 
-import { useGlobalContext } from "@/context/store"
-import { getProducts } from "@/utils/getProducts"
+import { productsApi } from "@/api/productsApi"
+import { Product } from "@/types/products"
 
 const ProductsList = () => {
-  const { isLoggedIn } = useGlobalContext()
   const { data: products, isPending } = useQuery({
     queryKey: ["products"],
-    queryFn: () => getProducts()
+    queryFn: () => productsApi.getProducts()
   })
-
-  console.log("IS_LOGGED_IN", isLoggedIn)
 
   return (
     <div className={s.container}>
       {isPending ? (
         <CircularProgress />
       ) : (
-        <ul>
-          {products.map((product: { _id: string; title: string; photoURL: string }) => (
-            <li key={product._id}>
-              <p>{product.title}</p>
-              <Image src={product.photoURL} alt="product" width={300} height={300} />
-            </li>
-          ))}
-        </ul>
+        products && (
+          <ul>
+            {products.map((product: Product) => (
+              <ProductItem key={product._id} product={product} />
+            ))}
+          </ul>
+        )
       )}
     </div>
   )

@@ -1,20 +1,16 @@
 "use client"
 
 import { CircularProgress } from "@mui/material"
-import { useQuery } from "@tanstack/react-query"
 
 import ProductItem from "../ProductItem"
 
 import s from "./ProductsList.module.scss"
 
-import { productsApi } from "@/api/productsApi"
+import { useQueryProducts } from "@/hooks/useProducts"
 import { Product } from "@/types/products"
 
 const ProductsList = () => {
-  const { data: products, isPending } = useQuery({
-    queryKey: ["products"],
-    queryFn: () => productsApi.getProducts()
-  })
+  const { data: products, isPending } = useQueryProducts()
 
   return (
     <div className={s.container}>
@@ -22,7 +18,7 @@ const ProductsList = () => {
         <CircularProgress />
       ) : (
         products && (
-          <ul>
+          <ul className={s.productList}>
             {products.map((product: Product) => (
               <ProductItem key={product._id} product={product} />
             ))}

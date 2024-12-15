@@ -1,0 +1,26 @@
+.productCardWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: max-content;
+  border-radius: 24px;
+  -webkit-box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.6);
+  -moz-box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.6);
+  box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.6);
+}
+
+.productImage {
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+}
+
+.productTextWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px;
+}
+
+.productPrice {
+  padding: 8px;
+}

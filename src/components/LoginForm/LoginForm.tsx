@@ -8,17 +8,23 @@ import { CustomTextField } from "../CustomTextField/CustomTextField"
 
 import s from "./LoginForm.module.scss"
 
+import { useGlobalContext } from "@/context/store"
 import { initialFormValues } from "@/helpers/initialFormValues"
 // import { LoginSchema } from "../LoginSchema"
 import routes from "@/helpers/routes"
+import { useMutateAuth } from "@/hooks/useAuth"
 import { LoginInitValues } from "@/types/initFormValuesTypes"
 
 const LoginForm = () => {
+  const loginMutation = useMutateAuth()
+  const { setIsLoggedIn } = useGlobalContext()
+
   const handleSubmit = async (
     values: LoginInitValues,
     { resetForm }: FormikHelpers<LoginInitValues>
   ) => {
-    console.log("VALUES", values)
+    await loginMutation.mutateAsync(values)
+    setIsLoggedIn(true)
     resetForm()
   }
 

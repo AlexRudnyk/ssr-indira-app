@@ -10,9 +10,9 @@ import {
   useMemo,
   useState
 } from "react"
-import Cookies from "js-cookie"
 import { jwtDecode } from "jwt-decode"
 
+import axiosInstance from "@/api/axiosInstance"
 import { storageKeys } from "@/helpers/storageKeys"
 
 interface GlobalContextType {
@@ -23,8 +23,17 @@ interface GlobalContextType {
 const GlobalContext = createContext<GlobalContextType | undefined>(undefined)
 
 export const GlobalContextProvider = ({ children }: { children: ReactNode }) => {
-  const accessToken = Cookies.get(storageKeys.access_token)
+  const [accessToken, setAccessToken] = useState<string>("")
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(Boolean(accessToken))
+
+  useEffect(() => {
+    const token = localStorage.getItem(storageKeys.access_token)
+    if (token) setAccessToken(token)
+  }, [])
+
+  useEffect(() => {
+    setIsLoggedIn(Boolean(accessToken))
+  }, [accessToken])
 
   useEffect(() => {
     if (accessToken) {
@@ -33,7 +42,8 @@ export const GlobalContextProvider = ({ children }: { children: ReactNode }) => 
       const isExpired = expiryDate && Date.now() > expiryDate
 
       if (isExpired) {
-        Cookies.remove(storageKeys.access_token)
+        localStorage.removeItem(storageKeys.access_token)
+        axiosInstance.defaults.headers.common.Authorization = undefined
         setIsLoggedIn(false)
       }
     }
@@ -46,6 +56,9 @@ export const GlobalContextProvider = ({ children }: { children: ReactNode }) => 
     }),
     [isLoggedIn]
   )
+
+  console.log("TOKEN", accessToken)
+  console.log("IS_LOGGED_IN", isLoggedIn)
 
   return <GlobalContext.Provider value={value}>{children}</GlobalContext.Provider>
 }

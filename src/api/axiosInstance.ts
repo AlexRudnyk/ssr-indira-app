@@ -19,7 +19,7 @@ axiosInstance.interceptors.request.use(request => {
       if (isExpired) {
         axiosInstance.defaults.headers.common.Authorization = undefined
         localStorage.removeItem(storageKeys.access_token)
-        window.location.replace("/login")
+        window.location.reload()
       }
     }
 

@@ -41,7 +41,9 @@ export const GlobalContextProvider = ({ children }: { children: ReactNode }) => 
       const isExpired = expiryDate && Date.now() > expiryDate
 
       if (isExpired) {
+        // localStorage.removeItem(storageKeys.access_token)
         setIsLoggedIn(false)
+        // window.location.replace("/login")
       }
     }
   }, [accessToken])

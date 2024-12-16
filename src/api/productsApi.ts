@@ -9,6 +9,7 @@ export const productsApi = {
       return data
     } catch (error) {
       console.log(error)
+      return []
     }
   },
 

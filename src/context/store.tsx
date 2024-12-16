@@ -12,7 +12,6 @@ import {
 } from "react"
 import { jwtDecode } from "jwt-decode"
 
-import axiosInstance from "@/api/axiosInstance"
 import { storageKeys } from "@/helpers/storageKeys"
 
 interface GlobalContextType {
@@ -42,8 +41,6 @@ export const GlobalContextProvider = ({ children }: { children: ReactNode }) => 
       const isExpired = expiryDate && Date.now() > expiryDate
 
       if (isExpired) {
-        localStorage.removeItem(storageKeys.access_token)
-        axiosInstance.defaults.headers.common.Authorization = undefined
         setIsLoggedIn(false)
       }
     }

@@ -9,6 +9,7 @@ import routes from "@/helpers/routes"
 
 const Navigation = () => {
   const { isLoggedIn } = useGlobalContext()
+
   return (
     <div className={s.navWrapper}>
       {!isLoggedIn && (

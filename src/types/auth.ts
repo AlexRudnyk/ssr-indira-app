@@ -6,12 +6,19 @@ export type User = {
   role: "ADMIN" | "USER"
 }
 
-export type LoginRes = {
-  accessToken: string
-  user: User
+export type RegisterCreds = {
+  name: string
+  phone: string
+  email: string
+  password: string
 }
 
 export type LoginCreds = {
   email: string
   password: string
+}
+
+export type LoginRes = {
+  accessToken: string
+  user: User
 }

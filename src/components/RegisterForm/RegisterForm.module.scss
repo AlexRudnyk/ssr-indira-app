@@ -1,0 +1,37 @@
+@use "../../styles/vars.scss" as v;
+
+.formWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: calc(100vh - (v.$headerHeight + v.$footerHeight));
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 500px;
+  padding: 24px;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  input {
+    border-radius: 8px;
+  }
+}
+
+.linkWrapper {
+  p {
+    text-align: end;
+  }
+
+  a {
+    color: blue;
+    text-decoration: underline;
+  }
+}

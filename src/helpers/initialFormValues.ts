@@ -1,11 +1,11 @@
 export const initialFormValues = {
-  //   register: {
-  //     password: "",
-  //     password_repeat: "",
-  //     email: "",
-  //     firstname: "",
-  //     lastname: ""
-  //   },
+  register: {
+    name: "",
+    phone: "",
+    email: "",
+    password: ""
+  },
+
   login: {
     email: "",
     password: ""

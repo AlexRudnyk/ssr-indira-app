@@ -15,8 +15,8 @@ const AuthWrapper: FC<Props> = ({ children }) => {
   const pathname = usePathname()
 
   useEffect(() => {
-    if (!isLoggedIn && pathname !== "/login") push("/login")
-    if (isLoggedIn && pathname === "/login") push("/")
+    if (!isLoggedIn && pathname !== "/login" && pathname !== "/register") push("/login")
+    if (isLoggedIn && (pathname === "/login" || pathname === "/register")) push("/")
   }, [isLoggedIn, pathname, push])
 
   return children

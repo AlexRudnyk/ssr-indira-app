@@ -12,11 +12,11 @@ import { useGlobalContext } from "@/context/store"
 import { initialFormValues } from "@/helpers/initialFormValues"
 // import { LoginSchema } from "../LoginSchema"
 import routes from "@/helpers/routes"
-import { useMutateAuth } from "@/hooks/useAuth"
+import { useMutateLogin } from "@/hooks/useAuth"
 import { LoginInitValues } from "@/types/initFormValuesTypes"
 
 const LoginForm = () => {
-  const loginMutation = useMutateAuth()
+  const loginMutation = useMutateLogin()
   const { setIsLoggedIn } = useGlobalContext()
 
   const handleSubmit = async (

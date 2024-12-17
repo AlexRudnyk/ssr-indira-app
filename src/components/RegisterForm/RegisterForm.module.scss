@@ -2,10 +2,9 @@
 
 .formWrapper {
   display: flex;
-  align-items: center;
   justify-content: center;
-  width: 100vw;
-  height: calc(100vh - (v.$headerHeight + v.$footerHeight));
+  width: 100%;
+  min-height: calc(100vh - (v.$headerHeight + v.$footerHeight));
 }
 
 .form {
@@ -14,6 +13,7 @@
   gap: 24px;
   width: 500px;
   padding: 24px;
+  padding-top: 64px;
 
   h2 {
     text-align: center;

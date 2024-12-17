@@ -10,9 +10,9 @@
 
 .logoBrand {
   position: absolute;
-  top: 30px;
+  top: 20px;
   left: 20px;
-  font-size: 48px;
+  font-size: 36px;
   color: v.$primary-color;
   @include m.brandFont();
 }

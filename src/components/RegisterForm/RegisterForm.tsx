@@ -13,6 +13,7 @@ import { initialFormValues } from "@/helpers/initialFormValues"
 import routes from "@/helpers/routes"
 import { useMutateRegister } from "@/hooks/useAuth"
 import { RegisterInitValues } from "@/types/initFormValuesTypes"
+import { RegisterSchema } from "@/yupSchemas"
 
 const RegisterForm = () => {
   const registerMutation = useMutateRegister()
@@ -20,7 +21,7 @@ const RegisterForm = () => {
 
   const handleSubmit = async (
     values: RegisterInitValues,
-    { resetForm }: FormikHelpers<RegisterInitValues>
+    { resetForm, setFieldError }: FormikHelpers<RegisterInitValues>
   ) => {
     try {
       await registerMutation.mutateAsync(values)
@@ -28,9 +29,14 @@ const RegisterForm = () => {
       push("/login")
     } catch (error: any) {
       if (error.response?.status === 409) {
-        console.log("Conflict Error: Phone number or email already exists.")
-      } else {
-        console.log("An unexpected error occurred:", error.message)
+        const errorText = error.response?.data?.message?.toLowerCase()
+        if (errorText.includes("phone")) {
+          setFieldError("phone", "This phone number is already registered.")
+        } else if (errorText.includes("email")) {
+          setFieldError("email", "This email is already registered.")
+        } else {
+          console.log("Conflict Error: Unknown conflict")
+        }
       }
     }
   }
@@ -40,7 +46,7 @@ const RegisterForm = () => {
       <Formik
         initialValues={initialFormValues.register}
         onSubmit={handleSubmit}
-        // validationSchema={LoginSchema()}
+        validationSchema={RegisterSchema()}
       >
         <Form className={s.form}>
           <h2>Please Sign Up</h2>

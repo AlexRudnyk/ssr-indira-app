@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100vw;
+  width: 100%;
   height: calc(100vh - (v.$headerHeight + v.$footerHeight));
 }
 

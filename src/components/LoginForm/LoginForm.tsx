@@ -10,10 +10,10 @@ import s from "./LoginForm.module.scss"
 
 import { useGlobalContext } from "@/context/store"
 import { initialFormValues } from "@/helpers/initialFormValues"
-// import { LoginSchema } from "../LoginSchema"
 import routes from "@/helpers/routes"
 import { useMutateLogin } from "@/hooks/useAuth"
 import { LoginInitValues } from "@/types/initFormValuesTypes"
+import { LoginSchema } from "@/yupSchemas"
 
 const LoginForm = () => {
   const loginMutation = useMutateLogin()
@@ -33,7 +33,7 @@ const LoginForm = () => {
       <Formik
         initialValues={initialFormValues.login}
         onSubmit={handleSubmit}
-        // validationSchema={LoginSchema()}
+        validationSchema={LoginSchema()}
       >
         <Form className={s.form}>
           <h2>Please Sign In</h2>

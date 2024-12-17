@@ -24,13 +24,13 @@ const Logo = () => {
 
   return currentRoute === routes.home ? (
     <div className={s.logoWrapper} onClick={handleUpClick}>
-      <Image src={logo} alt="logo mandala icon" width={80} height={80} className={s.logoIcon} />
+      <Image src={logo} alt="logo mandala icon" width={60} height={60} className={s.logoIcon} />
       <p className={s.logoBrand}>Indira</p>
     </div>
   ) : (
     <Link href={routes.home} onClick={handleUpClick}>
       <div className={s.logoWrapper}>
-        <Image src={logo} alt="logo mandala icon" width={80} height={80} className={s.logoIcon} />
+        <Image src={logo} alt="logo mandala icon" width={60} height={60} className={s.logoIcon} />
         <p className={s.logoBrand}>Indira</p>
       </div>
     </Link>

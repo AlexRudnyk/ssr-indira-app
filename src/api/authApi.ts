@@ -9,7 +9,6 @@ export const authApi = {
       const { data } = await axiosInstance.post<User>("auth/register", creds)
       return data
     } catch (error) {
-      // console.log("REGISTER_ERROR")
       throw error
     }
   },
@@ -20,7 +19,6 @@ export const authApi = {
       localStorage.setItem(storageKeys.access_token, data.accessToken)
       return data
     } catch (error) {
-      // console.log(error)
       throw error
     }
   }

@@ -13,8 +13,6 @@ import createWebStorage from "redux-persist/lib/storage/createWebStorage"
 
 import authReducer from "../redux/auth/authSlice"
 
-import { checkTokenExpiryMiddleware } from "./middlewares/checkTokenExpiry"
-
 const createNoopStorage = () => {
   return {
     getItem() {
@@ -49,7 +47,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
       }
-    }).concat(checkTokenExpiryMiddleware)
+    })
 })
 
 export const persistor = persistStore(store)

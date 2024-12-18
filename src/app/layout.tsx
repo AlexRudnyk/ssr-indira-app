@@ -1,3 +1,4 @@
+import { ToastContainer } from "react-toastify"
 import cn from "classnames"
 import type { Metadata } from "next"
 import { Great_Vibes, Outfit, Red_Hat_Display } from "next/font/google"
@@ -7,6 +8,8 @@ import Header from "@/components/Header"
 
 import { ReduxProvider } from "./providers/persistGate"
 import Providers from "./providers"
+
+import "react-toastify/dist/ReactToastify.css"
 
 import "./globals.scss"
 
@@ -46,6 +49,7 @@ export default function RootLayout({
             <Footer />
           </Providers>
         </ReduxProvider>
+        <ToastContainer />
       </body>
     </html>
   )

@@ -7,9 +7,10 @@ export const productsApi = {
     try {
       const { data } = await axiosInstance.get("products")
       return data
-    } catch (error) {
-      console.log(error)
-      throw error
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.message || "Failed to fetch products"
+      console.error("API Error:", errorMessage)
+      throw new Error(errorMessage)
     }
   },
 
@@ -17,9 +18,10 @@ export const productsApi = {
     try {
       const { data } = await axiosInstance.get(`products/${id}`)
       return data
-    } catch (error) {
-      console.log(error)
-      throw error
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.message || "Failed to fetch products"
+      console.error("API Error:", errorMessage)
+      throw new Error(errorMessage)
     }
   }
 }

@@ -22,3 +22,10 @@ export type LoginRes = {
   accessToken: string
   user: User
 }
+
+export type AuthSliceState = {
+  isLoggedIn: boolean
+  isLoading: boolean
+  user: User | null
+  errorMessage: string | null
+}

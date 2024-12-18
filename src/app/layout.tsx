@@ -5,11 +5,10 @@ import { Great_Vibes, Outfit, Red_Hat_Display } from "next/font/google"
 import Footer from "@/components/Footer"
 import Header from "@/components/Header"
 
+import { ReduxProvider } from "./providers/persistGate"
 import Providers from "./providers"
 
 import "./globals.scss"
-
-import { GlobalContextProvider } from "@/context/store"
 
 const greatVibes = Great_Vibes({
   subsets: ["latin"],
@@ -40,13 +39,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(outfit.variable, redHatDisplay.variable, greatVibes.variable)}>
-        <Providers>
-          <GlobalContextProvider>
+        <ReduxProvider>
+          <Providers>
             <Header />
             <main>{children}</main>
             <Footer />
-          </GlobalContextProvider>
-        </Providers>
+          </Providers>
+        </ReduxProvider>
       </body>
     </html>
   )

@@ -1,22 +1,16 @@
-import { useQuery } from "@tanstack/react-query"
+import { useSelector } from "react-redux"
 
-import { productsApi } from "@/api/productsApi"
+import { RootState } from "@/redux/store"
 
-const productsKeys = {
-  all: ["products"],
-  getOne: (id: string) => [...productsKeys.all, id]
+export const useProducts = () => {
+  const { products, product, isLoading, errorMessage } = useSelector(
+    (state: RootState) => state.products
+  )
+
+  return {
+    products,
+    product,
+    isLoading,
+    errorMessage
+  }
 }
-
-const useQueryProducts = () =>
-  useQuery({
-    queryKey: productsKeys.all,
-    queryFn: () => productsApi.getProducts()
-  })
-
-const useQueryProduct = (id: string) =>
-  useQuery({
-    queryKey: productsKeys.getOne(id),
-    queryFn: () => productsApi.getProductById(id)
-  })
-
-export { useQueryProducts, useQueryProduct, productsKeys }

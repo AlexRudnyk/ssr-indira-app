@@ -4,11 +4,11 @@ import Link from "next/link"
 
 import s from "./Navigation.module.scss"
 
-import { useGlobalContext } from "@/context/store"
 import routes from "@/helpers/routes"
+import { useAuth } from "@/hooks/useAuth"
 
 const Navigation = () => {
-  const { isLoggedIn } = useGlobalContext()
+  const { isLoggedIn } = useAuth()
 
   return (
     <div className={s.navWrapper}>

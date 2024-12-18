@@ -7,3 +7,10 @@ export type Product = {
   price: number
   comments: string[]
 }
+
+export type ProductsSliceState = {
+  products: Product[]
+  product: Product | null
+  isLoading: boolean
+  errorMessage: string | null
+}

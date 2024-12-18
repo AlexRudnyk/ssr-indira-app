@@ -5,7 +5,7 @@ import Image from "next/image"
 
 import s from "./ProductPage.module.scss"
 
-import { useQueryProduct } from "@/hooks/useProducts"
+import { useQueryProduct } from "@/hooks/useQueryProducts"
 
 type Props = {
   id: string
@@ -13,8 +13,6 @@ type Props = {
 
 const ProductPage: FC<Props> = ({ id }) => {
   const { data: product } = useQueryProduct(id)
-
-  //   if (product) console.log("PRODUCT", product)
 
   return (
     product && (

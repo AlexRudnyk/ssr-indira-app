@@ -1,18 +1,16 @@
-import { useMutation } from "@tanstack/react-query"
+import { useSelector } from "react-redux"
 
-import { authApi } from "@/api/authApi"
-import { LoginCreds, RegisterCreds } from "@/types/auth"
+import { RootState } from "@/redux/store"
 
-const useMutateRegister = () => {
-  return useMutation({
-    mutationFn: (creds: RegisterCreds) => authApi.register(creds)
-  })
+export const useAuth = () => {
+  const { isLoggedIn, isLoading, user, errorMessage } = useSelector(
+    (state: RootState) => state.auth
+  )
+
+  return {
+    isLoggedIn,
+    isLoading,
+    user,
+    errorMessage
+  }
 }
-
-const useMutateLogin = () => {
-  return useMutation({
-    mutationFn: (creds: LoginCreds) => authApi.login(creds)
-  })
-}
-
-export { useMutateRegister, useMutateLogin }

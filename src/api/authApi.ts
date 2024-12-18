@@ -21,5 +21,13 @@ export const authApi = {
     } catch (error) {
       throw error
     }
+  },
+
+  logout: async () => {
+    try {
+      axiosInstance.get("auth/logout")
+    } catch (error) {
+      throw error
+    }
   }
 }

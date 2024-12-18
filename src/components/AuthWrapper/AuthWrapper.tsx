@@ -3,14 +3,14 @@
 import { FC, useEffect } from "react"
 import { usePathname, useRouter } from "next/navigation"
 
-import { useGlobalContext } from "@/context/store"
+import { useAuth } from "@/hooks/useAuth"
 
 type Props = {
   children: React.ReactNode
 }
 
 const AuthWrapper: FC<Props> = ({ children }) => {
-  const { isLoggedIn } = useGlobalContext()
+  const { isLoggedIn } = useAuth()
   const { push } = useRouter()
   const pathname = usePathname()
 

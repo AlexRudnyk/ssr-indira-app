@@ -1,0 +1,8 @@
+@use "../../mixins/mixins.scss" as m;
+@use "../../styles/vars.scss" as v;
+
+.container {
+  min-height: calc(100vh - (v.$headerHeight + v.$footerHeight));
+
+  @include m.container();
+}

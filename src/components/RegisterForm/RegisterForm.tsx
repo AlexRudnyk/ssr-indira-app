@@ -1,9 +1,13 @@
 "use client"
 
+import { useDispatch } from "react-redux"
 import { Button } from "@mui/material"
 import { Form, Formik, FormikHelpers } from "formik"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+
+import { register } from "@/redux/auth/operations"
+import { AppDispatch } from "@/redux/store"
 
 import { CustomTextField } from "../CustomTextField/CustomTextField"
 
@@ -11,12 +15,11 @@ import s from "./RegisterForm.module.scss"
 
 import { initialFormValues } from "@/helpers/initialFormValues"
 import routes from "@/helpers/routes"
-import { useMutateRegister } from "@/hooks/useAuth"
 import { RegisterInitValues } from "@/types/initFormValuesTypes"
 import { RegisterSchema } from "@/yupSchemas"
 
 const RegisterForm = () => {
-  const registerMutation = useMutateRegister()
+  const dispatch = useDispatch<AppDispatch>()
   const { push } = useRouter()
 
   const handleSubmit = async (
@@ -24,7 +27,7 @@ const RegisterForm = () => {
     { resetForm, setFieldError }: FormikHelpers<RegisterInitValues>
   ) => {
     try {
-      await registerMutation.mutateAsync(values)
+      await dispatch(register(values))
       resetForm()
       push("/login")
     } catch (error: any) {

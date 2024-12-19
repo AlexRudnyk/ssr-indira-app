@@ -4,18 +4,22 @@ import { Button } from "@mui/material"
 import { Form, Formik, FormikHelpers } from "formik"
 
 import { CustomTextField } from "../CustomTextField/CustomTextField"
+import ImageUpload from "../ImageUpload/ImageUpload"
 
 import s from "./AddProductForm.module.scss"
 
 import { initialFormValues } from "@/helpers/initialFormValues"
+import { useMutateAddProduct } from "@/hooks/useQueryProducts"
 import { AddProductInitValues } from "@/types/initFormValuesTypes"
 
 const AddProductForm = () => {
-  const handleSubmit = (
+  const mutate = useMutateAddProduct()
+
+  const handleSubmit = async (
     values: AddProductInitValues,
     { resetForm }: FormikHelpers<AddProductInitValues>
   ) => {
-    console.log("VALUES", values)
+    await mutate.mutateAsync(values)
     resetForm()
   }
 
@@ -25,31 +29,34 @@ const AddProductForm = () => {
       onSubmit={handleSubmit}
       //   validationSchema={{}}
     >
-      <Form className={s.form}>
-        <h2>Please Add a Product</h2>
-        <CustomTextField name="title" id="outlined-basic" label="Title" variant="outlined" />
-        <CustomTextField name="text" id="outlined-basic" label="Text" variant="outlined" />
-        <CustomTextField
-          name="description"
-          id="outlined-basic"
-          label="Description"
-          variant="outlined"
-        />
-        <CustomTextField
-          name="price"
-          id="outlined-basic"
-          label="Price"
-          variant="outlined"
-          type="number"
-          InputProps={{
-            inputProps: { style: { appearance: "none", MozAppearance: "textfield" } }
-          }}
-        />
+      {({ setFieldValue }) => (
+        <Form className={s.form}>
+          <h2>Please Add a Product</h2>
+          <ImageUpload setFieldValue={setFieldValue} />
+          <CustomTextField name="title" id="outlined-basic" label="Title" variant="outlined" />
+          <CustomTextField name="text" id="outlined-basic" label="Text" variant="outlined" />
+          <CustomTextField
+            name="description"
+            id="outlined-basic"
+            label="Description"
+            variant="outlined"
+          />
+          <CustomTextField
+            name="price"
+            id="outlined-basic"
+            label="Price"
+            variant="outlined"
+            type="number"
+            InputProps={{
+              inputProps: { style: { appearance: "none", MozAppearance: "textfield" } }
+            }}
+          />
 
-        <Button type="submit" variant="contained">
-          Submit
-        </Button>
-      </Form>
+          <Button type="submit" variant="contained">
+            Submit
+          </Button>
+        </Form>
+      )}
     </Formik>
   )
 }

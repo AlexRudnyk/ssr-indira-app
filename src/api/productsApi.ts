@@ -1,5 +1,6 @@
 import axiosInstance from "./axiosInstance"
 
+import { AddProductInitValues } from "@/types/initFormValuesTypes"
 import { Product } from "@/types/products"
 
 export const productsApi = {
@@ -20,7 +21,16 @@ export const productsApi = {
       return data
     } catch (error: any) {
       const errorMessage = error.response?.data?.message || "Failed to fetch products"
-      console.error("API Error:", errorMessage)
+      throw new Error(errorMessage)
+    }
+  },
+
+  addProduct: async (values: AddProductInitValues): Promise<Product | undefined> => {
+    try {
+      const { data } = await axiosInstance.post("products", values)
+      return data
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.message || "Failed to add a product"
       throw new Error(errorMessage)
     }
   }

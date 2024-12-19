@@ -15,7 +15,7 @@ const ProductItem: FC<Props> = ({ product }) => {
 
   return (
     <li className={s.productCardWrapper}>
-      <Link href={`/products/${_id}`}>
+      <Link href={`/products/${_id}`} className={s.productItemLink}>
         <div>
           <Image src={photoURL} alt="product" width={400} height={400} className={s.productImage} />
           <div className={s.productTextWrapper}>

@@ -15,6 +15,7 @@ export const initialFormValues = {
     title: "",
     text: "",
     description: "",
+    photoURL: "",
     price: 1
   }
 }

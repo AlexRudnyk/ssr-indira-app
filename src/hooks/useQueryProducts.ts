@@ -1,6 +1,7 @@
-import { useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
 import { productsApi } from "@/api/productsApi"
+import { AddProductInitValues } from "@/types/initFormValuesTypes"
 
 const productsKeys = {
   all: ["products"],
@@ -19,4 +20,13 @@ const useQueryProduct = (id: string) =>
     queryFn: () => productsApi.getProductById(id)
   })
 
-export { useQueryProducts, useQueryProduct, productsKeys }
+const useMutateAddProduct = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: (values: AddProductInitValues) => productsApi.addProduct(values),
+    onSettled: () => queryClient.invalidateQueries({ queryKey: productsKeys.all })
+  })
+}
+
+export { useQueryProducts, useQueryProduct, useMutateAddProduct, productsKeys }

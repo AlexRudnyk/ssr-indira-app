@@ -1,0 +1,15 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 300px;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  input {
+    border-radius: 8px;
+  }
+}

@@ -9,5 +9,12 @@ export const initialFormValues = {
   login: {
     email: "",
     password: ""
+  },
+
+  addProduct: {
+    title: "",
+    text: "",
+    description: "",
+    price: 1
   }
 }

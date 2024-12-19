@@ -17,7 +17,6 @@ axiosInstance.interceptors.request.use(request => {
       const decoded = jwtDecode(token)
       const expiryDate = decoded.exp && decoded.exp * 1000
       const isExpired = expiryDate && Date.now() > expiryDate
-
       if (isExpired) {
         axiosInstance.defaults.headers.common.Authorization = undefined
         localStorage.removeItem(storageKeys.access_token)

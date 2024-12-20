@@ -17,3 +17,5 @@ export type AddProductInitValues = {
   photoURL: string
   price: number
 }
+
+export type EditProductInitValues = Omit<AddProductInitValues, "photoURL">

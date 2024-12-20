@@ -1,6 +1,6 @@
 import axiosInstance from "./axiosInstance"
 
-import { AddProductInitValues } from "@/types/initFormValuesTypes"
+import { AddProductInitValues, EditProductInitValues } from "@/types/initFormValuesTypes"
 import { Product } from "@/types/products"
 
 export const productsApi = {
@@ -31,6 +31,16 @@ export const productsApi = {
       return data
     } catch (error: any) {
       const errorMessage = error.response?.data?.message || "Failed to add a product"
+      throw new Error(errorMessage)
+    }
+  },
+
+  editProduct: async (id: string, values: EditProductInitValues): Promise<Product | undefined> => {
+    try {
+      const { data } = await axiosInstance.patch(`products/${id}`, values)
+      return data
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.message || "Failed to update a product"
       throw new Error(errorMessage)
     }
   }

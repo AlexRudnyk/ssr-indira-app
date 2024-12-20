@@ -1,9 +1,12 @@
-import { FC } from "react"
-import { IconButton } from "@mui/material"
+"use client"
+
+import { FC, useState } from "react"
+import { IconButton, Modal } from "@mui/material"
 import Image from "next/image"
 
 import pencilIcon from "../../../public/icons/pencil.svg"
 import trashBinIcon from "../../../public/icons/trash.svg"
+import EditProductForm from "../EditProductForm"
 
 import s from "./AdminProductItem.module.scss"
 
@@ -15,6 +18,7 @@ type Props = {
 
 const AdminProductItem: FC<Props> = ({ product }) => {
   const { photoURL, title, price, comments } = product
+  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
 
   return (
     <li className={s.productItem}>
@@ -32,7 +36,7 @@ const AdminProductItem: FC<Props> = ({ product }) => {
       <div className={s.priceAndBtnBlock}>
         <p className={s.productPrice}>{price} UAH</p>
         <div className={s.btnWrapper}>
-          <IconButton>
+          <IconButton onClick={() => setIsEditModalOpen(true)}>
             <Image src={pencilIcon} alt="pencil icon" width={32} height={32} />
           </IconButton>
           <IconButton>
@@ -40,6 +44,9 @@ const AdminProductItem: FC<Props> = ({ product }) => {
           </IconButton>
         </div>
       </div>
+      <Modal open={isEditModalOpen} onClose={() => setIsEditModalOpen(false)}>
+        <EditProductForm onClose={() => setIsEditModalOpen(false)} product={product} />
+      </Modal>
     </li>
   )
 }

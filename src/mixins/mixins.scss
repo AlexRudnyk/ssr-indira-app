@@ -83,3 +83,9 @@
     height: $size;
   }
 }
+
+@mixin cardShadow($x: 10px, $y: 10px, $blur: 30px, $spread: 0px, $color: rgba(0, 0, 0, 0.6)) {
+  -webkit-box-shadow: $x $y $blur $spread $color;
+  -moz-box-shadow: $x $y $blur $spread $color;
+  box-shadow: $x $y $blur $spread $color;
+}

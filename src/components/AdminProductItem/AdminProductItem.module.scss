@@ -1,0 +1,35 @@
+@use "../../mixins/mixins.scss" as m;
+
+.productItem {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-radius: 16px;
+
+  @include m.cardShadow();
+}
+
+.title {
+  font-weight: 600;
+}
+
+.productImage {
+  border-radius: 16px;
+  margin-right: 32px;
+}
+
+.priceAndBtnBlock {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 32px;
+}
+
+.productPrice {
+  margin-right: 80px;
+}
+
+.btnWrapper {
+  display: flex;
+  gap: 24px;
+}

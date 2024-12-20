@@ -1,4 +1,5 @@
 import AddProductForm from "../AddProductForm"
+import AdminProductsList from "../AdminProductsList"
 
 import s from "./AdminPage.module.scss"
 const AdminPage = () => {
@@ -6,7 +7,7 @@ const AdminPage = () => {
     <div className={s.container}>
       <div className={s.flexWrapper}>
         <AddProductForm />
-        <div>List</div>
+        <AdminProductsList />
       </div>
     </div>
   )

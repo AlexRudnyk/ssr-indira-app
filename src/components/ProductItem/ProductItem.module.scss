@@ -1,10 +1,11 @@
+@use "../../mixins/mixins.scss" as m;
+
 .productCardWrapper {
   width: max-content;
   border-radius: 24px;
   width: 400px;
-  -webkit-box-shadow: 10px 10px 30px 0px rgba(0, 0, 0, 0.6);
-  -moz-box-shadow: 10px 10px 30px 0px rgba(0, 0, 0, 0.6);
-  box-shadow: 10px 10px 30px 0px rgba(0, 0, 0, 0.6);
+
+  @include m.cardShadow();
 }
 
 .productItemLink {

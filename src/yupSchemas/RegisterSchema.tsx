@@ -27,5 +27,3 @@ export const RegisterSchema = () => {
       )
   })
 }
-
-export default RegisterSchema

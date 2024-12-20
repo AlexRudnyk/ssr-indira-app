@@ -16,5 +16,3 @@ export const LoginSchema = () => {
       )
   })
 }
-
-export default LoginSchema

@@ -1,3 +1,5 @@
+@use "../../styles/vars.scss" as v;
+
 .wrapper {
   margin-bottom: 32px;
 }
@@ -5,13 +7,21 @@
 .uploadFileLabel {
   display: flex;
   justify-content: center;
+  align-items: center;
   cursor: pointer;
-  margin-bottom: 32px;
-  border-bottom: 2px solid grey;
+  padding-bottom: 32px;
+  border-bottom: 2px solid lightgrey;
+  padding: 8px;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #ffffff !important;
+  background-color: #654321;
+  border-radius: v.$btnBorderRadius;
 }
 
 .previewWrapper {
   position: relative;
+  margin-bottom: 16px;
 }
 
 .successImage {

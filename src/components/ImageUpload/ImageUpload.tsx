@@ -67,8 +67,6 @@ const ImageUpload: FC<FormikProps> = ({ setFieldValue }) => {
 
   return (
     <div className={s.wrapper}>
-      {/* <div>
-        <div> */}
       <input
         hidden
         id="hidden-input"
@@ -79,20 +77,13 @@ const ImageUpload: FC<FormikProps> = ({ setFieldValue }) => {
       />
       {!preview && (
         <label htmlFor="hidden-input" className={s.uploadFileLabel}>
-          <div>Upload file</div>
+          Upload Image
         </label>
       )}
       {preview && (
         <div>
           <div className={s.previewWrapper}>
-            <Image
-              src={preview}
-              alt="preview"
-              width={300}
-              height={300}
-              //   crop="fill"
-              //   gravity="auto"
-            />
+            <Image src={preview} alt="preview" width={300} height={300} />
             {isUploaded && (
               <Image
                 src={SuccessImage}
@@ -104,26 +95,15 @@ const ImageUpload: FC<FormikProps> = ({ setFieldValue }) => {
             )}
           </div>
           <div className={s.buttonsWrapper}>
-            <Button
-              type="button"
-              onClick={uploadImage}
-              disabled={isUploaded}
-              //   className="flex justify-center items-center py-3 px-6 outline-none transition ease-in-out hover:scale-110 bg-[var(--primary)] text-white rounded-2xl"
-            >
+            <Button type="button" variant="contained" onClick={uploadImage} disabled={isUploaded}>
               Upload
             </Button>
-            <Button
-              type="button"
-              onClick={handleResetClick}
-              //   className="flex justify-center items-center py-3 px-6 outline-none transition ease-in-out hover:scale-110 bg-[var(--primary)] text-white rounded-2xl"
-            >
+            <Button type="button" variant="contained" onClick={handleResetClick}>
               Reset
             </Button>
           </div>
         </div>
       )}
-      {/* </div>
-      </div> */}
     </div>
   )
 }

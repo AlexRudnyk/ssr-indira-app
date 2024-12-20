@@ -11,6 +11,7 @@ import s from "./AddProductForm.module.scss"
 import { initialFormValues } from "@/helpers/initialFormValues"
 import { useMutateAddProduct } from "@/hooks/useQueryProducts"
 import { AddProductInitValues } from "@/types/initFormValuesTypes"
+import { AddProductSchema } from "@/yupSchemas"
 
 const AddProductForm = () => {
   const mutate = useMutateAddProduct()
@@ -27,7 +28,7 @@ const AddProductForm = () => {
     <Formik
       initialValues={initialFormValues.addProduct}
       onSubmit={handleSubmit}
-      //   validationSchema={{}}
+      validationSchema={AddProductSchema()}
     >
       {({ setFieldValue }) => (
         <Form className={s.form}>
@@ -40,6 +41,8 @@ const AddProductForm = () => {
             id="outlined-basic"
             label="Description"
             variant="outlined"
+            multiline
+            maxRows={4}
           />
           <CustomTextField
             name="price"

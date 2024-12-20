@@ -1,2 +1,3 @@
-export { default as LoginSchema } from "./LoginSchema"
-export { default as RegisterSchema } from "./RegisterSchema"
+export { LoginSchema } from "./LoginSchema"
+export { RegisterSchema } from "./RegisterSchema"
+export { AddProductSchema } from "./AddProductSchema"

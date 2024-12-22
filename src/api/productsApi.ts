@@ -1,7 +1,7 @@
 import axiosInstance from "./axiosInstance"
 
-import { AddProductInitValues, EditProductInitValues } from "@/types/initFormValuesTypes"
-import { Product } from "@/types/products"
+import { AddProductInitValues } from "@/types/initFormValuesTypes"
+import { EditProductBody, Product } from "@/types/products"
 
 export const productsApi = {
   getProducts: async (): Promise<Product[] | undefined> => {
@@ -35,7 +35,7 @@ export const productsApi = {
     }
   },
 
-  editProduct: async (id: string, values: EditProductInitValues): Promise<Product | undefined> => {
+  editProduct: async ({ id, values }: EditProductBody): Promise<Product | undefined> => {
     try {
       const { data } = await axiosInstance.patch(`products/${id}`, values)
       return data

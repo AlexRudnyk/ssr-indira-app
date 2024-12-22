@@ -1,3 +1,5 @@
+import { EditProductInitValues } from "./initFormValuesTypes"
+
 export type Product = {
   _id: string
   title: string
@@ -13,4 +15,9 @@ export type ProductsSliceState = {
   product: Product | null
   isLoading: boolean
   errorMessage: string | null
+}
+
+export type EditProductBody = {
+  id: string
+  values: EditProductInitValues
 }

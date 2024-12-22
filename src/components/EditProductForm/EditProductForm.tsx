@@ -26,10 +26,10 @@ const EditProductForm: FC<Props> = ({ onClose, product }) => {
     price
   }
 
-  const mutation = useMutateEditProduct(_id)
+  const mutation = useMutateEditProduct()
 
   const handleSubmit = async (values: Omit<AddProductInitValues, "photoURL">) => {
-    await mutation.mutateAsync(values)
+    await mutation.mutateAsync({ id: _id, values })
     onClose()
   }
 

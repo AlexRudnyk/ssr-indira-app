@@ -39,10 +39,20 @@ const useMutateEditProduct = () => {
   })
 }
 
+const useMutateDeleteProduct = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: (id: string) => productsApi.deleteProduct(id),
+    onSettled: () => queryClient.invalidateQueries({ queryKey: productsKeys.all })
+  })
+}
+
 export {
   useQueryProducts,
   useQueryProduct,
   useMutateAddProduct,
   useMutateEditProduct,
+  useMutateDeleteProduct,
   productsKeys
 }

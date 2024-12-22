@@ -43,5 +43,15 @@ export const productsApi = {
       const errorMessage = error.response?.data?.message || "Failed to update a product"
       throw new Error(errorMessage)
     }
+  },
+
+  deleteProduct: async (id: string): Promise<Product | undefined> => {
+    try {
+      const { data } = await axiosInstance.delete(`products/${id}`)
+      return data
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.message || "Failed to delete a product"
+      throw new Error(errorMessage)
+    }
   }
 }

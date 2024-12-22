@@ -6,10 +6,13 @@ import Image from "next/image"
 
 import pencilIcon from "../../../public/icons/pencil.svg"
 import trashBinIcon from "../../../public/icons/trash.svg"
+import ConfirmActionModal from "../ConfirmActionModal"
 import EditProductForm from "../EditProductForm"
 
 import s from "./AdminProductItem.module.scss"
 
+import { productsApi } from "@/api/productsApi"
+import { useMutateDeleteProduct } from "@/hooks/useQueryProducts"
 import { Product } from "@/types/products"
 
 type Props = {
@@ -17,8 +20,10 @@ type Props = {
 }
 
 const AdminProductItem: FC<Props> = ({ product }) => {
-  const { photoURL, title, price, comments } = product
+  const { _id, photoURL, title, price, comments } = product
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
+  const [isConfirmActionModalOpen, setIsConfirmActionModalOpen] = useState<boolean>(false)
+  const mutation = useMutateDeleteProduct()
 
   return (
     <li className={s.productItem}>
@@ -39,7 +44,7 @@ const AdminProductItem: FC<Props> = ({ product }) => {
           <IconButton onClick={() => setIsEditModalOpen(true)}>
             <Image src={pencilIcon} alt="pencil icon" width={32} height={32} />
           </IconButton>
-          <IconButton>
+          <IconButton onClick={() => setIsConfirmActionModalOpen(true)}>
             <Image src={trashBinIcon} alt="trash bin icon" width={32} height={32} />
           </IconButton>
         </div>
@@ -47,6 +52,12 @@ const AdminProductItem: FC<Props> = ({ product }) => {
       <Modal open={isEditModalOpen} onClose={() => setIsEditModalOpen(false)}>
         <EditProductForm onClose={() => setIsEditModalOpen(false)} product={product} />
       </Modal>
+      <ConfirmActionModal
+        title="Do you really want to delete this item?"
+        isConfirmActionModalOpen={isConfirmActionModalOpen}
+        setIsConfirmActionModalOpen={setIsConfirmActionModalOpen}
+        actionHandler={() => mutation.mutateAsync(_id)}
+      />
     </li>
   )
 }

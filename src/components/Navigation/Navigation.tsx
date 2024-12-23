@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { IconButton } from "@mui/material"
+import Badge from "@mui/material/Badge"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -14,6 +15,7 @@ import ConfirmActionModal from "../ConfirmActionModal"
 
 import s from "./Navigation.module.scss"
 
+import { useGlobalContext } from "@/context/store"
 import routes from "@/helpers/routes"
 import { useAuth } from "@/hooks/useAuth"
 
@@ -21,6 +23,7 @@ const Navigation = () => {
   const { isLoggedIn, user } = useAuth()
   const dispatch = useDispatch<AppDispatch>()
   const [isConfirmActionModalOpen, setIsConfirmActionModalOpen] = useState<boolean>(false)
+  const { cart } = useGlobalContext()
 
   const handleLogout = () => {
     dispatch(logout())
@@ -34,9 +37,11 @@ const Navigation = () => {
         </Link>
       )}
       {user?.role !== "ADMIN" && (
-        <Link href={routes.cart} className={s.cartLink}>
-          Cart
-        </Link>
+        <Badge badgeContent={cart.length} color="error">
+          <Link href={routes.cart} className={s.cartLink}>
+            Cart
+          </Link>
+        </Badge>
       )}
       {user?.role === "ADMIN" && (
         <Link href={routes.admin} className={s.cartLink}>

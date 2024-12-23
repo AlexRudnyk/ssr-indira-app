@@ -1,3 +1,5 @@
+import CartPage from "@/components/CartPage"
+
 export default function Cart() {
-  return <>Hello!!</>
+  return <CartPage />
 }

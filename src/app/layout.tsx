@@ -13,6 +13,8 @@ import "react-toastify/dist/ReactToastify.css"
 
 import "./globals.scss"
 
+import { GlobalContextProvider } from "@/context/store"
+
 const greatVibes = Great_Vibes({
   subsets: ["latin"],
   weight: "400",
@@ -43,11 +45,13 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn(outfit.variable, redHatDisplay.variable, greatVibes.variable)}>
         <ReduxProvider>
-          <Providers>
-            <Header />
-            <main>{children}</main>
-            <Footer />
-          </Providers>
+          <GlobalContextProvider>
+            <Providers>
+              <Header />
+              <main>{children}</main>
+              <Footer />
+            </Providers>
+          </GlobalContextProvider>
         </ReduxProvider>
         <ToastContainer />
       </body>

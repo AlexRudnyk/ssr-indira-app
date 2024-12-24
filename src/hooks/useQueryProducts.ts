@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
 import { productsApi } from "@/api/productsApi"
-import { AddProductInitValues, EditProductInitValues } from "@/types/initFormValuesTypes"
+import { AddProductInitValues } from "@/types/initFormValuesTypes"
 import { EditProductBody } from "@/types/products"
 
 const productsKeys = {

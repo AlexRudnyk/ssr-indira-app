@@ -1,6 +1,9 @@
 @use "../../mixins/mixins.scss" as m;
+@use "../../styles/vars.scss" as v;
 
 .container {
+  min-height: calc(100vh - (v.$headerHeight + v.$footerHeight));
+
   @include m.container();
 }
 
@@ -13,7 +16,28 @@
   border-radius: 24px;
 }
 
+.descAndBtnsWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .descriptionWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.btnWrapper {
+  display: flex;
+  gap: 48px;
+
+  button {
+    width: 150px;
+  }
+}
+
+.btnsContainer {
   display: flex;
   flex-direction: column;
   gap: 32px;

@@ -10,7 +10,6 @@ export const productsApi = {
       return data
     } catch (error: any) {
       const errorMessage = error.response?.data?.message || "Failed to fetch products"
-      console.error("API Error:", errorMessage)
       throw new Error(errorMessage)
     }
   },

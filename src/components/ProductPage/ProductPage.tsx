@@ -1,14 +1,19 @@
 "use client"
 
 import { FC, useEffect, useState } from "react"
+import { useDispatch } from "react-redux"
 import { Button } from "@mui/material"
 import Image from "next/image"
 import Link from "next/link"
+
+import { addToCart } from "@/redux/auth/operations"
+import { AppDispatch } from "@/redux/store"
 
 import s from "./ProductPage.module.scss"
 
 import { useGlobalContext } from "@/context/store"
 import routes from "@/helpers/routes"
+import { useAuth } from "@/hooks/useAuth"
 import { useQueryProduct } from "@/hooks/useQueryProducts"
 
 type Props = {
@@ -18,31 +23,42 @@ type Props = {
 const ProductPage: FC<Props> = ({ id }) => {
   const { data: product } = useQueryProduct(id)
   const { cart, setCart } = useGlobalContext()
+  const { isLoggedIn, user } = useAuth()
   const [isAddedToCart, setIsAddedToCart] = useState<boolean>(false)
+  const dispatch = useDispatch<AppDispatch>()
 
-  const handleAddtoCartClick = () => {
-    const isInCart = cart.find(item => item._id === id)
-    if (isInCart) {
-      return
+  const handleAddToCartClick = () => {
+    if (!product) return
+
+    const isInCart = isLoggedIn
+      ? user?.productsInCart.some(item => item._id === id)
+      : cart.some(item => item._id === id)
+
+    if (isInCart) return
+
+    const cartItem = {
+      _id: id,
+      title: product.title,
+      text: product.text,
+      photoURL: product.photoURL,
+      price: product.price,
+      quantity: 1
+    }
+
+    if (isLoggedIn) {
+      dispatch(addToCart(cartItem))
     } else {
-      if (!product) return
-      const cartItem = {
-        _id: id,
-        title: product.title,
-        text: product.text,
-        photoURL: product.photoURL,
-        price: product.price,
-        quantity: 1
-      }
-      sessionStorage.setItem("cart", JSON.stringify([...cart, cartItem]))
-      setCart([...cart, cartItem])
+      const updatedCart = [...cart, cartItem]
+      sessionStorage.setItem("cart", JSON.stringify(updatedCart))
+      setCart(updatedCart)
     }
   }
 
   useEffect(() => {
-    const isInCart = cart.find(item => item._id === id)
-    if (isInCart) setIsAddedToCart(true)
-  }, [cart, id])
+    const cartItems = isLoggedIn ? user?.productsInCart : cart
+    const isInCart = cartItems?.some(item => item._id === id)
+    setIsAddedToCart(Boolean(isInCart))
+  }, [cart, id, isLoggedIn, user?.productsInCart])
 
   return (
     product && (
@@ -67,7 +83,7 @@ const ProductPage: FC<Props> = ({ id }) => {
                 <Button
                   type="button"
                   variant="contained"
-                  onClick={handleAddtoCartClick}
+                  onClick={handleAddToCartClick}
                   disabled={isAddedToCart}
                 >
                   Add to Cart

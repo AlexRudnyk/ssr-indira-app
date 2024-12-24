@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-import { login, logout, register } from "./operations"
+import { addToCart, getCurrentUser, login, logout, register } from "./operations"
 
-import { AuthSliceState, LoginRes } from "@/types/auth"
+import { AuthSliceState, LoginRes, User } from "@/types/auth"
+import { CartItem } from "@/types/products"
 
 const initialState: AuthSliceState = {
   isLoggedIn: false,
@@ -47,6 +48,14 @@ const authSlice = createSlice({
       })
       .addCase(login.rejected, handleRejected)
 
+      .addCase(getCurrentUser.pending, handlePending)
+      .addCase(getCurrentUser.fulfilled, (state, action: PayloadAction<User>) => {
+        state.isLoading = false
+        state.errorMessage = null
+        state.user = action.payload
+      })
+      .addCase(getCurrentUser.rejected, handleRejected)
+
       .addCase(logout.pending, handlePending)
       .addCase(logout.fulfilled, state => {
         state.isLoading = false
@@ -55,6 +64,14 @@ const authSlice = createSlice({
         state.user = null
       })
       .addCase(logout.rejected, handleRejected)
+
+      .addCase(addToCart.pending, handlePending)
+      .addCase(addToCart.fulfilled, (state, action: PayloadAction<CartItem>) => {
+        state.isLoading = false
+        state.errorMessage = null
+        if (state.user) state.user.productsInCart = [...state.user.productsInCart, action.payload]
+      })
+      .addCase(addToCart.rejected, handleRejected)
   }
 })
 

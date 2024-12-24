@@ -23,6 +23,15 @@ export const authApi = {
     }
   },
 
+  getCurrentUser: async () => {
+    try {
+      const { data } = await axiosInstance.get<User>("auth/getCurrent")
+      return data
+    } catch (error) {
+      throw error
+    }
+  },
+
   logout: async () => {
     try {
       axiosInstance.get("auth/logout")

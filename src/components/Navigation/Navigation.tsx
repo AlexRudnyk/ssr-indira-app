@@ -1,13 +1,13 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { IconButton } from "@mui/material"
 import Badge from "@mui/material/Badge"
 import Image from "next/image"
 import Link from "next/link"
 
-import { logout } from "@/redux/auth/operations"
+import { getCurrentUser, logout } from "@/redux/auth/operations"
 import { AppDispatch } from "@/redux/store"
 
 import logoutIcon from "../../../public/icons/logout.svg"
@@ -29,6 +29,10 @@ const Navigation = () => {
     dispatch(logout())
   }
 
+  useEffect(() => {
+    if (isLoggedIn) dispatch(getCurrentUser())
+  }, [dispatch, isLoggedIn])
+
   return (
     <div className={s.navWrapper}>
       {!isLoggedIn && (
@@ -37,7 +41,10 @@ const Navigation = () => {
         </Link>
       )}
       {user?.role !== "ADMIN" && (
-        <Badge badgeContent={isLoggedIn ? user?.productsInCart.length : cart.length} color="error">
+        <Badge
+          badgeContent={isLoggedIn && user ? user.productsInCart.length : cart.length}
+          color="error"
+        >
           <Link href={routes.cart} className={s.cartLink}>
             Cart
           </Link>

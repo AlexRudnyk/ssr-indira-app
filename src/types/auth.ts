@@ -1,9 +1,12 @@
+import { CartItem } from "./products"
+
 export type User = {
   _id: string
   name: string
   phone: string
   email: string
   role: "ADMIN" | "USER"
+  productsInCart: CartItem[]
 }
 
 export type RegisterCreds = {

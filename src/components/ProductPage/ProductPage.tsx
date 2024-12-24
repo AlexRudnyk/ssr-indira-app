@@ -21,17 +21,26 @@ const ProductPage: FC<Props> = ({ id }) => {
   const [isAddedToCart, setIsAddedToCart] = useState<boolean>(false)
 
   const handleAddtoCartClick = () => {
-    const isInCart = cart.includes(id)
+    const isInCart = cart.find(item => item._id === id)
     if (isInCart) {
       return
     } else {
-      sessionStorage.setItem("cart", JSON.stringify([...cart, id]))
-      setCart([...cart, id])
+      if (!product) return
+      const cartItem = {
+        _id: id,
+        title: product.title,
+        text: product.text,
+        photoURL: product.photoURL,
+        price: product.price,
+        quantity: 1
+      }
+      sessionStorage.setItem("cart", JSON.stringify([...cart, cartItem]))
+      setCart([...cart, cartItem])
     }
   }
 
   useEffect(() => {
-    const isInCart = cart.includes(id)
+    const isInCart = cart.find(item => item._id === id)
     if (isInCart) setIsAddedToCart(true)
   }, [cart, id])
 

@@ -3,11 +3,12 @@
 import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from "react"
 
 import { ContextType } from "@/types/context"
+import { CartItem } from "@/types/products"
 
 const GlobalContext = createContext<ContextType | undefined>(undefined)
 
 export const GlobalContextProvider = ({ children }: { children: ReactNode }) => {
-  const [cart, setCart] = useState<string[]>([])
+  const [cart, setCart] = useState<CartItem[]>([])
 
   useEffect(() => {
     const storedCartData = sessionStorage.getItem("cart")

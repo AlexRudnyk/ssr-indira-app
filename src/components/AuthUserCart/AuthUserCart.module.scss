@@ -1,0 +1,29 @@
+@use "../../mixins/mixins.scss" as m;
+@use "../../styles/vars.scss" as v;
+
+.messageEmptywrapper {
+  margin-top: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  align-items: center;
+}
+
+.messageCartEmpty {
+  font-size: 48px;
+
+  @include m.titleFont;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  width: max-content;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: v.$white-color !important;
+  background-color: v.$primary-color;
+  border-radius: v.$btnBorderRadius;
+}

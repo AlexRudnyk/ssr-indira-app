@@ -37,7 +37,7 @@ const Navigation = () => {
         </Link>
       )}
       {user?.role !== "ADMIN" && (
-        <Badge badgeContent={cart.length} color="error">
+        <Badge badgeContent={isLoggedIn ? user?.productsInCart.length : cart.length} color="error">
           <Link href={routes.cart} className={s.cartLink}>
             Cart
           </Link>

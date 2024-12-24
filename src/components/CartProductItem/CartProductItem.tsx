@@ -2,14 +2,19 @@ import { FC } from "react"
 
 import s from "./CartProductItem.module.scss"
 
-import { Product } from "@/types/products"
+import { CartItem } from "@/types/products"
 
 type Props = {
-  product: Product
+  product: CartItem
 }
 
 const CartProductItem: FC<Props> = ({ product }) => {
-  return <li>{product.title}</li>
+  return (
+    <li>
+      <p>{product.title}</p>
+      <p>{product.quantity}</p>
+    </li>
+  )
 }
 
 export default CartProductItem

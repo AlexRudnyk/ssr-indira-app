@@ -21,3 +21,12 @@ export type EditProductBody = {
   id: string
   values: EditProductInitValues
 }
+
+export type CartItem = {
+  _id: string
+  title: string
+  text: string
+  photoURL: string
+  price: number
+  quantity: number
+}

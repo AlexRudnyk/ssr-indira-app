@@ -11,7 +11,6 @@ import EditProductForm from "../EditProductForm"
 
 import s from "./AdminProductItem.module.scss"
 
-import { productsApi } from "@/api/productsApi"
 import { useMutateDeleteProduct } from "@/hooks/useQueryProducts"
 import { Product } from "@/types/products"
 

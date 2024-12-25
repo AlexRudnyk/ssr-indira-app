@@ -68,3 +68,31 @@ export const addToCart = createAsyncThunk<CartItem, CartItem, { rejectValue: str
     }
   }
 )
+
+export const decrement = createAsyncThunk<
+  { data: number; id: string },
+  string,
+  { rejectValue: string }
+>("auth/decrement", async (id, thunkAPI) => {
+  try {
+    const data = await cartApi.decrement(id)
+    return { data, id }
+  } catch (error: any) {
+    toast.warn(error.response?.data?.message)
+    return thunkAPI.rejectWithValue(error.response?.data?.message)
+  }
+})
+
+export const increment = createAsyncThunk<
+  { data: number; id: string },
+  string,
+  { rejectValue: string }
+>("auth/increment", async (id, thunkAPI) => {
+  try {
+    const data = await cartApi.increment(id)
+    return { data, id }
+  } catch (error: any) {
+    toast.warn(error.response?.data?.message)
+    return thunkAPI.rejectWithValue(error.response?.data?.message)
+  }
+})

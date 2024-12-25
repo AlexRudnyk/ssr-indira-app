@@ -1,8 +1,12 @@
 "use client"
 
 import { FC } from "react"
+import { useDispatch } from "react-redux"
 import { IconButton } from "@mui/material"
 import Image from "next/image"
+
+import { decrement, increment } from "@/redux/auth/operations"
+import { AppDispatch } from "@/redux/store"
 
 import trashBinIcon from "../../../public/icons/trash.svg"
 
@@ -10,6 +14,7 @@ import s from "./CartProductItem.module.scss"
 
 import { useGlobalContext } from "@/context/store"
 import { storageKeys } from "@/helpers/storageKeys"
+import { useAuth } from "@/hooks/useAuth"
 import { CartItem } from "@/types/products"
 
 type Props = {
@@ -25,49 +30,42 @@ const customStyle = {
 }
 
 const CartProductItem: FC<Props> = ({ product }) => {
-  const { title, text, price, photoURL, quantity } = product
+  const { _id, title, text, price, photoURL, quantity } = product
   const { cart, setCart } = useGlobalContext()
+  const dispatch = useDispatch<AppDispatch>()
+  const { isLoggedIn } = useAuth()
 
-  const handleDecreaseClick = () => {
-    const stringCart = sessionStorage.getItem(storageKeys.cart)
-    if (!stringCart) return
-    const cartFromStorage = JSON.parse(stringCart)
-    const index = cart.findIndex(item => item._id === product._id)
-    const storageIndex = cartFromStorage.findIndex((item: CartItem) => item._id === product._id)
-    if (index === -1 || storageIndex === -1) return
+  const handleProductQuantity = (action: "increase" | "decrease") => {
+    const updateQuantity = (quantity: number) =>
+      action === "increase" ? quantity + 1 : quantity - 1
 
-    const decreasedQuantityProduct = {
-      ...product,
-      quantity: product.quantity - 1
+    if (isLoggedIn) {
+      const actionDispatcher = action === "increase" ? increment : decrement
+      dispatch(actionDispatcher(_id))
+    } else {
+      const stringCart = sessionStorage.getItem(storageKeys.cart)
+      if (!stringCart) return
+
+      const cartFromStorage = JSON.parse(stringCart)
+      const index = cart.findIndex(item => item._id === product._id)
+      const storageIndex = cartFromStorage.findIndex((item: CartItem) => item._id === product._id)
+
+      if (index === -1 || storageIndex === -1) return
+
+      const updatedProduct = {
+        ...product,
+        quantity: updateQuantity(product.quantity)
+      }
+
+      const updatedCart = [...cart]
+      const updatedStorageCart = [...cartFromStorage]
+
+      updatedCart[index] = updatedProduct
+      updatedStorageCart[storageIndex] = updatedProduct
+
+      setCart(updatedCart)
+      sessionStorage.setItem(storageKeys.cart, JSON.stringify(updatedStorageCart))
     }
-    const updatedCart = [...cart]
-    const updatedStorageCart = [...cartFromStorage]
-    updatedCart[index] = decreasedQuantityProduct
-    updatedStorageCart[storageIndex] = decreasedQuantityProduct
-
-    setCart(updatedCart)
-    sessionStorage.setItem(storageKeys.cart, JSON.stringify(updatedStorageCart))
-  }
-
-  const handleIncreaseClick = () => {
-    const stringCart = sessionStorage.getItem(storageKeys.cart)
-    if (!stringCart) return
-    const cartFromStorage = JSON.parse(stringCart)
-    const index = cart.findIndex(item => item._id === product._id)
-    const storageIndex = cartFromStorage.findIndex((item: CartItem) => item._id === product._id)
-    if (index === -1 || storageIndex === -1) return
-
-    const increasedQuantityProduct = {
-      ...product,
-      quantity: product.quantity + 1
-    }
-    const updatedCart = [...cart]
-    const updatedStorageCart = [...cartFromStorage]
-    updatedCart[index] = increasedQuantityProduct
-    updatedStorageCart[storageIndex] = increasedQuantityProduct
-
-    setCart(updatedCart)
-    sessionStorage.setItem(storageKeys.cart, JSON.stringify(updatedStorageCart))
   }
 
   return (
@@ -82,13 +80,13 @@ const CartProductItem: FC<Props> = ({ product }) => {
         <div className={s.quantityControlsWrapper}>
           <IconButton
             sx={customStyle}
-            onClick={handleDecreaseClick}
+            onClick={() => handleProductQuantity("decrease")}
             disabled={product.quantity <= 1}
           >
             -
           </IconButton>
           <p className={s.quantity}>{quantity}</p>
-          <IconButton sx={customStyle} onClick={handleIncreaseClick}>
+          <IconButton sx={customStyle} onClick={() => handleProductQuantity("increase")}>
             +
           </IconButton>
         </div>

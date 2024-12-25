@@ -1,6 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-import { addToCart, getCurrentUser, login, logout, register } from "./operations"
+import {
+  addToCart,
+  decrement,
+  getCurrentUser,
+  increment,
+  login,
+  logout,
+  register
+} from "./operations"
 
 import { AuthSliceState, LoginRes, User } from "@/types/auth"
 import { CartItem } from "@/types/products"
@@ -72,6 +80,42 @@ const authSlice = createSlice({
         if (state.user) state.user.productsInCart = [...state.user.productsInCart, action.payload]
       })
       .addCase(addToCart.rejected, handleRejected)
+
+      .addCase(decrement.pending, handlePending)
+      .addCase(
+        decrement.fulfilled,
+        (state, action: PayloadAction<{ data: number; id: string }>) => {
+          state.isLoading = false
+          state.errorMessage = null
+          const index = state.user?.productsInCart.findIndex(
+            product => product._id === action.payload.id
+          )
+          if (index === undefined || index < 0) return
+          state.user!.productsInCart[index] = {
+            ...state.user!.productsInCart[index],
+            quantity: action.payload.data
+          }
+        }
+      )
+      .addCase(decrement.rejected, handleRejected)
+
+      .addCase(increment.pending, handlePending)
+      .addCase(
+        increment.fulfilled,
+        (state, action: PayloadAction<{ data: number; id: string }>) => {
+          state.isLoading = false
+          state.errorMessage = null
+          const index = state.user?.productsInCart.findIndex(
+            product => product._id === action.payload.id
+          )
+          if (index === undefined || index < 0) return
+          state.user!.productsInCart[index] = {
+            ...state.user!.productsInCart[index],
+            quantity: action.payload.data
+          }
+        }
+      )
+      .addCase(increment.rejected, handleRejected)
   }
 })
 

@@ -25,11 +25,39 @@ const CartProductItem: FC<Props> = ({ product }) => {
       <div className={s.priceAndQuantityWrapper}>
         <p>Price: {price} UAH</p>
         <div className={s.quantityControlsWrapper}>
-          <IconButton>-</IconButton>
+          <IconButton
+            sx={{
+              width: 48,
+              height: 48,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+          >
+            -
+          </IconButton>
           <p>{quantity}</p>
-          <IconButton>+</IconButton>
+          <IconButton
+            sx={{
+              width: 48,
+              height: 48,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+          >
+            +
+          </IconButton>
         </div>
-        <IconButton>
+        <IconButton
+          sx={{
+            width: 48,
+            height: 48,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+          }}
+        >
           <Image src={trashBinIcon} alt="trash bin icon" width={32} height={32} />
         </IconButton>
       </div>

@@ -1,4 +1,8 @@
 import { FC } from "react"
+import { IconButton } from "@mui/material"
+import Image from "next/image"
+
+import trashBinIcon from "../../../public/icons/trash.svg"
 
 import s from "./CartProductItem.module.scss"
 
@@ -9,10 +13,26 @@ type Props = {
 }
 
 const CartProductItem: FC<Props> = ({ product }) => {
+  const { title, text, price, photoURL, quantity } = product
+
   return (
-    <li>
-      <p>{product.title}</p>
-      <p>{product.quantity}</p>
+    <li className={s.cartItemWrapper}>
+      <Image src={photoURL} alt="product image" width={90} height={90} className={s.image} />
+      <div className={s.textWrapper}>
+        <p className={s.title}>{title}</p>
+        <p>{text}</p>
+      </div>
+      <div className={s.priceAndQuantityWrapper}>
+        <p>Price: {price} UAH</p>
+        <div className={s.quantityControlsWrapper}>
+          <IconButton>-</IconButton>
+          <p>{quantity}</p>
+          <IconButton>+</IconButton>
+        </div>
+        <IconButton>
+          <Image src={trashBinIcon} alt="trash bin icon" width={32} height={32} />
+        </IconButton>
+      </div>
     </li>
   )
 }

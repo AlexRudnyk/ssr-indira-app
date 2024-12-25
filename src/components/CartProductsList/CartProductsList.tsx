@@ -6,7 +6,6 @@ import CartProductItem from "../CartProductItem"
 
 import s from "./CartProductsList.module.scss"
 
-// import { useQueryProducts } from "@/hooks/useQueryProducts"
 import { CartItem } from "@/types/products"
 
 type Props = {
@@ -14,17 +13,9 @@ type Props = {
 }
 
 const CartProductsList: FC<Props> = ({ cart }) => {
-  // const { data: products } = useQueryProducts()
-
-  // const productsInCart = cart.reduce<Product[]>((acc, productId) => {
-  //   const foundProduct = products?.find(product => product._id === productId)
-  //   if (foundProduct) acc.push(foundProduct)
-  //   return acc
-  // }, [])
-
   return (
     cart && (
-      <ul>
+      <ul className={s.cartItemsList}>
         {cart.map(item => (
           <CartProductItem key={item._id} product={item} />
         ))}

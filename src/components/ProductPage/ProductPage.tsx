@@ -13,6 +13,7 @@ import s from "./ProductPage.module.scss"
 
 import { useGlobalContext } from "@/context/store"
 import routes from "@/helpers/routes"
+import { storageKeys } from "@/helpers/storageKeys"
 import { useAuth } from "@/hooks/useAuth"
 import { useQueryProduct } from "@/hooks/useQueryProducts"
 
@@ -49,7 +50,7 @@ const ProductPage: FC<Props> = ({ id }) => {
       dispatch(addToCart(cartItem))
     } else {
       const updatedCart = [...cart, cartItem]
-      sessionStorage.setItem("cart", JSON.stringify(updatedCart))
+      sessionStorage.setItem(storageKeys.cart, JSON.stringify(updatedCart))
       setCart(updatedCart)
     }
   }

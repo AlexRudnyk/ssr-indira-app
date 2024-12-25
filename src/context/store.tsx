@@ -2,6 +2,7 @@
 
 import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from "react"
 
+import { storageKeys } from "@/helpers/storageKeys"
 import { ContextType } from "@/types/context"
 import { CartItem } from "@/types/products"
 
@@ -11,7 +12,7 @@ export const GlobalContextProvider = ({ children }: { children: ReactNode }) => 
   const [cart, setCart] = useState<CartItem[]>([])
 
   useEffect(() => {
-    const storedCartData = sessionStorage.getItem("cart")
+    const storedCartData = sessionStorage.getItem(storageKeys.cart)
 
     if (storedCartData) {
       try {

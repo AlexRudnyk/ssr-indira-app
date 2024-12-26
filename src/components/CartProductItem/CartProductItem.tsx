@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux"
 import { IconButton } from "@mui/material"
 import Image from "next/image"
 
-import { decrement, increment } from "@/redux/auth/operations"
+import { decrement, increment, removeFromCart } from "@/redux/auth/operations"
 import { AppDispatch } from "@/redux/store"
 
 import trashBinIcon from "../../../public/icons/trash.svg"
@@ -68,6 +68,25 @@ const CartProductItem: FC<Props> = ({ product }) => {
     }
   }
 
+  const handleDeleteClick = () => {
+    const removeFromCartHandler = (cartArray: CartItem[]) =>
+      cartArray.filter(product => product._id !== _id)
+
+    if (isLoggedIn) {
+      dispatch(removeFromCart(_id))
+    } else {
+      const stringCart = sessionStorage.getItem(storageKeys.cart)
+      if (!stringCart) return
+
+      const cartFromStorage = JSON.parse(stringCart)
+      const updatedCart = removeFromCartHandler(cart)
+      const updatedStorageCart = removeFromCartHandler(cartFromStorage)
+
+      setCart(updatedCart)
+      sessionStorage.setItem(storageKeys.cart, JSON.stringify(updatedStorageCart))
+    }
+  }
+
   return (
     <li className={s.cartItemWrapper}>
       <Image src={photoURL} alt="product image" width={90} height={90} className={s.image} />
@@ -90,7 +109,7 @@ const CartProductItem: FC<Props> = ({ product }) => {
             +
           </IconButton>
         </div>
-        <IconButton sx={customStyle}>
+        <IconButton sx={customStyle} onClick={handleDeleteClick}>
           <Image src={trashBinIcon} alt="trash bin icon" width={32} height={32} />
         </IconButton>
       </div>

@@ -96,3 +96,16 @@ export const increment = createAsyncThunk<
     return thunkAPI.rejectWithValue(error.response?.data?.message)
   }
 })
+
+export const removeFromCart = createAsyncThunk<string, string, { rejectValue: string }>(
+  "auth/removeFromCart",
+  async (id, thunkAPI) => {
+    try {
+      const data = await cartApi.removeFromCart(id)
+      return data
+    } catch (error: any) {
+      toast.warn(error.response?.data?.message)
+      return thunkAPI.rejectWithValue(error.response?.data?.message)
+    }
+  }
+)

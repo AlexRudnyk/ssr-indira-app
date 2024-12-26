@@ -1,6 +1,5 @@
 import axiosInstance from "./axiosInstance"
 
-import { storageKeys } from "@/helpers/storageKeys"
 import { CartItem } from "@/types/products"
 
 export const cartApi = {
@@ -30,6 +29,16 @@ export const cartApi = {
       return data
     } catch (error: any) {
       const errorMessage = error.response?.data?.message || "Failed to increment"
+      throw new Error(errorMessage)
+    }
+  },
+
+  removeFromCart: async (id: string) => {
+    try {
+      const { data } = await axiosInstance.delete<string>(`cart/${id}`)
+      return data
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.message || "Failed to delete from cart"
       throw new Error(errorMessage)
     }
   }

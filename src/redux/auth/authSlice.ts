@@ -7,7 +7,8 @@ import {
   increment,
   login,
   logout,
-  register
+  register,
+  removeFromCart
 } from "./operations"
 
 import { AuthSliceState, LoginRes, User } from "@/types/auth"
@@ -116,6 +117,18 @@ const authSlice = createSlice({
         }
       )
       .addCase(increment.rejected, handleRejected)
+
+      .addCase(removeFromCart.pending, handlePending)
+      .addCase(removeFromCart.fulfilled, (state, action: PayloadAction<string>) => {
+        state.isLoading = false
+        state.errorMessage = null
+        if (state.user) {
+          state.user.productsInCart = state.user.productsInCart.filter(
+            product => product._id !== action.payload
+          )
+        }
+      })
+      .addCase(removeFromCart.rejected, handleRejected)
   }
 })
 

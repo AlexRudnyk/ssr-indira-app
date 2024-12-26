@@ -36,5 +36,18 @@
 .title {
   text-align: center;
   font-size: 32px;
-  margin-bottom: 48px;
+}
+
+.cartProductListWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.totalSum {
+  display: inline-flex;
+  justify-content: center;
+  width: 80px;
+  font-size: 20px;
+  font-weight: 600;
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import { FC } from "react"
+import { FC, useState } from "react"
 import { useDispatch } from "react-redux"
 import { IconButton } from "@mui/material"
 import Image from "next/image"
@@ -9,6 +9,7 @@ import { decrement, increment, removeFromCart } from "@/redux/auth/operations"
 import { AppDispatch } from "@/redux/store"
 
 import trashBinIcon from "../../../public/icons/trash.svg"
+import ConfirmActionModal from "../ConfirmActionModal"
 
 import s from "./CartProductItem.module.scss"
 
@@ -34,6 +35,7 @@ const CartProductItem: FC<Props> = ({ product }) => {
   const { cart, setCart } = useGlobalContext()
   const dispatch = useDispatch<AppDispatch>()
   const { isLoggedIn } = useAuth()
+  const [isConfirmActionModalOpen, setIsConfirmActionModalOpen] = useState<boolean>(false)
 
   const handleProductQuantity = (action: "increase" | "decrease") => {
     const updateQuantity = (quantity: number) =>
@@ -109,10 +111,16 @@ const CartProductItem: FC<Props> = ({ product }) => {
             +
           </IconButton>
         </div>
-        <IconButton sx={customStyle} onClick={handleDeleteClick}>
+        <IconButton sx={customStyle} onClick={() => setIsConfirmActionModalOpen(true)}>
           <Image src={trashBinIcon} alt="trash bin icon" width={32} height={32} />
         </IconButton>
       </div>
+      <ConfirmActionModal
+        title="Do you really want to remove this item?"
+        isConfirmActionModalOpen={isConfirmActionModalOpen}
+        setIsConfirmActionModalOpen={setIsConfirmActionModalOpen}
+        actionHandler={handleDeleteClick}
+      />
     </li>
   )
 }

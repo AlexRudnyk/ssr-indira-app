@@ -17,5 +17,11 @@ export const initialFormValues = {
     description: "",
     photoURL: "",
     price: 1
+  },
+
+  makeOrder: {
+    name: "",
+    phone: "",
+    email: ""
   }
 }

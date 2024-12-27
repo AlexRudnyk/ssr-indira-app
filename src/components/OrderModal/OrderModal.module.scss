@@ -1,0 +1,30 @@
+@use "../../styles/vars.scss" as v;
+
+.wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 24px;
+  width: 600px;
+  padding: 48px;
+  background-color: v.$white-color;
+  border-radius: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  input {
+    border-radius: 8px;
+  }
+}

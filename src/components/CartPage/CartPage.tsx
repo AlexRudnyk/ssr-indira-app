@@ -10,18 +10,20 @@ import { clearCart } from "@/redux/auth/operations"
 import { AppDispatch } from "@/redux/store"
 
 import CartProductsList from "../CartProductsList"
+import OrderModal from "../OrderModal"
 
 import s from "./CartPage.module.scss"
 
 import { cartApi } from "@/api/cartApi"
 import { useGlobalContext } from "@/context/store"
 import routes from "@/helpers/routes"
+import { storageKeys } from "@/helpers/storageKeys"
 import { useAuth } from "@/hooks/useAuth"
 import { MailBody } from "@/types/mailBody"
 
 const CartPage = () => {
   const { isLoggedIn, user } = useAuth()
-  const { cart } = useGlobalContext()
+  const { cart, setCart } = useGlobalContext()
   const [totalSum, setTotalSum] = useState<number>(0)
   const [totalSumDB, setTotalSumDB] = useState<number>(0)
   const [isOrderModalOpen, setIsOrderModalOpen] = useState<boolean>(false)
@@ -45,11 +47,7 @@ const CartPage = () => {
     name,
     phone,
     email
-  }: {
-    name: string
-    phone: string
-    email: string
-  }) => {
+  }: Pick<MailBody, "name" | "phone" | "email">) => {
     const mailBody: MailBody = {
       name,
       phone,
@@ -58,8 +56,15 @@ const CartPage = () => {
       totalSum: isLoggedIn ? totalSumDB : totalSum
     }
     await cartApi.sendOrder(mailBody)
-    await dispatch(clearCart())
-    push(routes.home)
+    if (isLoggedIn) {
+      push(routes.home)
+      dispatch(clearCart())
+    } else {
+      push(routes.home)
+      setIsOrderModalOpen(false)
+      setCart([])
+      sessionStorage.removeItem(storageKeys.cart)
+    }
   }
 
   const handleOrderClick = () => {
@@ -71,6 +76,7 @@ const CartPage = () => {
         email: user.email
       })
     } else {
+      setIsOrderModalOpen(true)
     }
   }
 
@@ -99,7 +105,10 @@ const CartPage = () => {
         </div>
       )}
       <Modal open={isOrderModalOpen} onClose={() => setIsOrderModalOpen(false)}>
-        <></>
+        <OrderModal
+          onOrderSubmit={handleOrderSubmit}
+          setIsOrderModalOpen={() => setIsOrderModalOpen(false)}
+        />
       </Modal>
     </div>
   )

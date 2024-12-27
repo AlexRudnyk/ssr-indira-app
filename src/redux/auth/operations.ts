@@ -109,3 +109,15 @@ export const removeFromCart = createAsyncThunk<string, string, { rejectValue: st
     }
   }
 )
+
+export const clearCart = createAsyncThunk<void, void, { rejectValue: string }>(
+  "auth/clearCart",
+  async (_, thunkAPI) => {
+    try {
+      await cartApi.clearCart()
+    } catch (error: any) {
+      toast.warn(error.response?.data?.message)
+      return thunkAPI.rejectWithValue(error.response?.data?.message)
+    }
+  }
+)

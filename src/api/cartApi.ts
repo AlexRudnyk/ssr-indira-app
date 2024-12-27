@@ -1,5 +1,6 @@
 import axiosInstance from "./axiosInstance"
 
+import { MailBody } from "@/types/mailBody"
 import { CartItem } from "@/types/products"
 
 export const cartApi = {
@@ -39,6 +40,24 @@ export const cartApi = {
       return data
     } catch (error: any) {
       const errorMessage = error.response?.data?.message || "Failed to delete from cart"
+      throw new Error(errorMessage)
+    }
+  },
+
+  clearCart: async () => {
+    try {
+      await axiosInstance.post<{ message: string }>("cart/clear")
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.message || "Failed to clear cart"
+      throw new Error(errorMessage)
+    }
+  },
+
+  sendOrder: async (mailBody: MailBody) => {
+    try {
+      await axiosInstance.post(`order`, mailBody)
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.message || "Failed to send order to email"
       throw new Error(errorMessage)
     }
   }

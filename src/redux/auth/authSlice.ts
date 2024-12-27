@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 import {
   addToCart,
+  clearCart,
   decrement,
   getCurrentUser,
   increment,
@@ -129,6 +130,16 @@ const authSlice = createSlice({
         }
       })
       .addCase(removeFromCart.rejected, handleRejected)
+
+      .addCase(clearCart.pending, handlePending)
+      .addCase(clearCart.fulfilled, state => {
+        state.isLoading = false
+        state.errorMessage = null
+        if (state.user) {
+          state.user.productsInCart = []
+        }
+      })
+      .addCase(clearCart.rejected, handleRejected)
   }
 })
 

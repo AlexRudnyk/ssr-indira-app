@@ -11,6 +11,7 @@ import { addToCart } from "@/redux/auth/operations"
 import { AppDispatch } from "@/redux/store"
 
 import CommentsForm from "../CommentsForm"
+import CommentsList from "../CommentsList"
 
 import s from "./ProductPage.module.scss"
 
@@ -32,6 +33,7 @@ const ProductPage: FC<Props> = ({ id }) => {
   const { isLoggedIn, user } = useAuth()
   const [isAddedToCart, setIsAddedToCart] = useState<boolean>(false)
   const [isAddCommentModalOpen, setIsAddCommentModalOpen] = useState<boolean>(false)
+  const [isCommentsListOpen, setIsCommentsListOpen] = useState<boolean>(false)
   const dispatch = useDispatch<AppDispatch>()
 
   const handleAddToCartClick = () => {
@@ -110,7 +112,12 @@ const ProductPage: FC<Props> = ({ id }) => {
                 </Link>
               </div>
               <div className={s.btnWrapper}>
-                <Button type="button" variant="outlined">
+                <Button
+                  type="button"
+                  variant="outlined"
+                  onClick={() => setIsCommentsListOpen(!isCommentsListOpen)}
+                  disabled={comments?.length === 0}
+                >
                   Comments ({comments?.length})
                 </Button>
                 <Button type="button" variant="outlined" onClick={handleAddCommentClick}>
@@ -123,6 +130,7 @@ const ProductPage: FC<Props> = ({ id }) => {
             </div>
           </div>
         </div>
+        {comments && isCommentsListOpen && <CommentsList comments={comments} />}
       </div>
     )
   )

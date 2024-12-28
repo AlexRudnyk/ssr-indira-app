@@ -33,7 +33,14 @@ const CommentsForm: FC<Props> = ({ productId, onClose }) => {
       >
         <Form className={s.form}>
           <h2>Please leave your comment</h2>
-          <CustomTextField name="text" id="outlined-basic" label="Comment" variant="outlined" />
+          <CustomTextField
+            name="text"
+            id="outlined-basic"
+            label="Comment"
+            variant="outlined"
+            multiline
+            maxRows={4}
+          />
           <Button variant="contained" type="submit">
             Submit
           </Button>

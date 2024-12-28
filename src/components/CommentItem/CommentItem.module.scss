@@ -1,0 +1,19 @@
+@use "../../styles/vars.scss" as v;
+
+.commentListItem {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 24px;
+  border: 2px solid v.$light-grey-color;
+}
+
+.userName {
+  color: v.$grey-color;
+}
+
+.date {
+  color: v.$grey-color;
+  text-align: end;
+}

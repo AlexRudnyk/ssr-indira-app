@@ -6,5 +6,6 @@ export const regexps = {
   title: /^[\w\s'"\-.,():;А-Яа-яЄєІіЇїҐґ?!]{2,100}$/,
   text: /^[\w\s'"\-.,():;А-Яа-яЄєІіЇїҐґ?!]{2,500}$/,
   description: /^[\w\s'"\-.,():;А-Яа-яЄєІіЇїҐґ?!]{2,1000}$/,
-  photoURL: /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp))$/i
+  photoURL: /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp))$/i,
+  comment: /^[\w\s'"\-.,():;А-Яа-яЄєІіЇїҐґ?!]{2,5000}$/
 }

@@ -2,7 +2,10 @@ import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query
 
 import ProductPage from "@/components/ProductPage"
 
+import { commentsApi } from "@/api/commentsApi"
 import { productsApi } from "@/api/productsApi"
+import { commentsKeys } from "@/hooks/useQueryComments"
+import { productsKeys } from "@/hooks/useQueryProducts"
 
 type Props = {
   params: Promise<{ id: string }>
@@ -13,8 +16,13 @@ export default async function Product({ params }: Props) {
   const queryClient = new QueryClient()
 
   await queryClient.prefetchQuery({
-    queryKey: ["products", id],
+    queryKey: productsKeys.getOne(id),
     queryFn: () => productsApi.getProductById(id)
+  })
+
+  await queryClient.prefetchQuery({
+    queryKey: commentsKeys.allOfProduct(id),
+    queryFn: () => commentsApi.getComments(id)
   })
 
   return (

@@ -11,5 +11,9 @@
 .productList {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: 48px;
+  width: 100%;
+  max-width: 1176px;
+  margin-left: auto;
+  margin-right: auto;
 }

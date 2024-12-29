@@ -8,7 +8,7 @@ import { Product } from "@/types/products"
 type Props = {
   title: string
   onClose: () => void
-  actionHandler: () => Promise<Product | undefined> | void
+  actionHandler: () => Promise<Product | undefined> | Promise<void>
 }
 
 const ConfirmModalBody: FC<Props> = ({ title, onClose, actionHandler }) => {

@@ -17,3 +17,9 @@
   color: v.$grey-color;
   text-align: end;
 }
+
+.adminBtnsWrapper {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+}

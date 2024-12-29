@@ -21,7 +21,7 @@ export default async function Product({ params }: Props) {
   })
 
   await queryClient.prefetchQuery({
-    queryKey: commentsKeys.allOfProduct(id),
+    queryKey: commentsKeys.all,
     queryFn: () => commentsApi.getComments(id)
   })
 

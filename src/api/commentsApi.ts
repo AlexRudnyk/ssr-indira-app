@@ -21,6 +21,25 @@ export const commentsApi = {
       const errorMessage = error.response?.data?.message || "Failed to add comment"
       throw new Error(errorMessage)
     }
+  },
+
+  removeComment: async (commentId: string) => {
+    try {
+      await axiosInstance.delete(`comments/${commentId}`)
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.message || "Failed to remove comment"
+      throw new Error(errorMessage)
+    }
+  },
+
+  replyComment: async ({ commentId, values }: { commentId: string; values: { text: string } }) => {
+    try {
+      const { data } = await axiosInstance.patch<Comment>(`comments/${commentId}`, values)
+      return data
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.message || "Failed to reply a comment"
+      throw new Error(errorMessage)
+    }
   }
 
   //   decrement: async (id: string) => {

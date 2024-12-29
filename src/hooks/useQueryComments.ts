@@ -3,12 +3,12 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { commentsApi } from "@/api/commentsApi"
 
 const commentsKeys = {
-  allOfProduct: (productId: string) => ["comments", productId]
+  all: ["comments"]
 }
 
 const useQueryComments = (productId: string) =>
   useQuery({
-    queryKey: commentsKeys.allOfProduct(productId),
+    queryKey: commentsKeys.all,
     queryFn: () => commentsApi.getComments(productId)
   })
 
@@ -23,8 +23,25 @@ const useMutateAddComment = (productId: string) => {
 
   return useMutation({
     mutationFn: (values: { text: string }) => commentsApi.addComment({ productId, values }),
-    onSettled: () =>
-      queryClient.invalidateQueries({ queryKey: commentsKeys.allOfProduct(productId) })
+    onSettled: () => queryClient.invalidateQueries({ queryKey: commentsKeys.all })
+  })
+}
+
+const useMutateRemoveComment = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: (commentId: string) => commentsApi.removeComment(commentId),
+    onSettled: () => queryClient.invalidateQueries({ queryKey: commentsKeys.all })
+  })
+}
+
+const useMutateReplyComment = (commentId: string) => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: (values: { text: string }) => commentsApi.replyComment({ commentId, values }),
+    onSettled: () => queryClient.invalidateQueries({ queryKey: commentsKeys.all })
   })
 }
 
@@ -54,5 +71,7 @@ export {
   //   useMutateDeleteProduct,
   useQueryComments,
   useMutateAddComment,
+  useMutateRemoveComment,
+  useMutateReplyComment,
   commentsKeys
 }

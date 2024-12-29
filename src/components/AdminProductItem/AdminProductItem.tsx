@@ -41,10 +41,10 @@ const AdminProductItem: FC<Props> = ({ product }) => {
         <p className={s.productPrice}>{price} UAH</p>
         <div className={s.btnWrapper}>
           <IconButton onClick={() => setIsEditModalOpen(true)}>
-            <Image src={pencilIcon} alt="pencil icon" width={32} height={32} />
+            <Image src={pencilIcon} alt="pencil icon" width={24} height={24} />
           </IconButton>
           <IconButton onClick={() => setIsConfirmActionModalOpen(true)}>
-            <Image src={trashBinIcon} alt="trash bin icon" width={32} height={32} />
+            <Image src={trashBinIcon} alt="trash bin icon" width={24} height={24} />
           </IconButton>
         </div>
       </div>

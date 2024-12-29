@@ -97,14 +97,16 @@ const ProductPage: FC<Props> = ({ id }) => {
             </div>
             <div className={s.btnsContainer}>
               <div className={s.btnWrapper}>
-                <Button
-                  type="button"
-                  variant="contained"
-                  onClick={handleAddToCartClick}
-                  disabled={isAddedToCart}
-                >
-                  Add to Cart
-                </Button>
+                {user?.role !== "ADMIN" && (
+                  <Button
+                    type="button"
+                    variant="contained"
+                    onClick={handleAddToCartClick}
+                    disabled={isAddedToCart}
+                  >
+                    Add to Cart
+                  </Button>
+                )}
                 <Link href={routes.home}>
                   <Button type="button" variant="contained">
                     Back to Home
@@ -120,9 +122,11 @@ const ProductPage: FC<Props> = ({ id }) => {
                 >
                   Comments ({comments?.length})
                 </Button>
-                <Button type="button" variant="outlined" onClick={handleAddCommentClick}>
-                  Add Comment
-                </Button>
+                {user?.role !== "ADMIN" && (
+                  <Button type="button" variant="outlined" onClick={handleAddCommentClick}>
+                    Add Comment
+                  </Button>
+                )}
                 <Modal open={isAddCommentModalOpen} onClose={() => setIsAddCommentModalOpen(false)}>
                   <CommentsForm productId={id} onClose={() => setIsAddCommentModalOpen(false)} />
                 </Modal>

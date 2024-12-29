@@ -8,7 +8,7 @@ import { Product } from "@/types/products"
 type Props = {
   isConfirmActionModalOpen: boolean
   setIsConfirmActionModalOpen: (arg: boolean) => void
-  actionHandler: () => Promise<Product | undefined> | void
+  actionHandler: () => Promise<Product | undefined> | Promise<void>
   title: string
 }
 

@@ -25,8 +25,9 @@ const Navigation = () => {
   const [isConfirmActionModalOpen, setIsConfirmActionModalOpen] = useState<boolean>(false)
   const { cart } = useGlobalContext()
 
-  const handleLogout = () => {
-    dispatch(logout())
+  const handleLogout = async () => {
+    await dispatch(logout())
+    setIsConfirmActionModalOpen(false)
   }
 
   useEffect(() => {

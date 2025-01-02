@@ -6,19 +6,33 @@ import { commentsApi } from "@/api/commentsApi"
 import { productsApi } from "@/api/productsApi"
 import { commentsKeys } from "@/hooks/useQueryComments"
 import { productsKeys } from "@/hooks/useQueryProducts"
+import { Product as ProductType } from "@/types/products"
 
 type Props = {
   params: Promise<{ id: string }>
 }
 
-export default async function Product({ params }: Props) {
+const queryClient = new QueryClient()
+
+export async function generateMetadata({ params }: Props) {
   const { id } = await params
-  const queryClient = new QueryClient()
 
   await queryClient.prefetchQuery({
     queryKey: productsKeys.getOne(id),
     queryFn: () => productsApi.getProductById(id)
   })
+  const product: ProductType | undefined = queryClient.getQueryData(productsKeys.getOne(id))
+  if (!product) return
+  const { title, text } = product
+
+  return {
+    title,
+    description: text
+  }
+}
+
+export default async function Product({ params }: Props) {
+  const { id } = await params
 
   await queryClient.prefetchQuery({
     queryKey: commentsKeys.all,

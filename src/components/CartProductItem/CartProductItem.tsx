@@ -112,7 +112,7 @@ const CartProductItem: FC<Props> = ({ product }) => {
           </IconButton>
         </div>
         <IconButton sx={customStyle} onClick={() => setIsConfirmActionModalOpen(true)}>
-          <Image src={trashBinIcon} alt="trash bin icon" width={32} height={32} />
+          <Image src={trashBinIcon} alt="trash bin icon" width={24} height={24} />
         </IconButton>
       </div>
       <ConfirmActionModal

@@ -12,10 +12,9 @@ type Props = {
   params: Promise<{ id: string }>
 }
 
-const queryClient = new QueryClient()
-
 export async function generateMetadata({ params }: Props) {
   const { id } = await params
+  const queryClient = new QueryClient()
 
   await queryClient.prefetchQuery({
     queryKey: productsKeys.getOne(id),
@@ -33,6 +32,12 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function Product({ params }: Props) {
   const { id } = await params
+  const queryClient = new QueryClient()
+
+  await queryClient.prefetchQuery({
+    queryKey: productsKeys.getOne(id),
+    queryFn: () => productsApi.getProductById(id)
+  })
 
   await queryClient.prefetchQuery({
     queryKey: commentsKeys.all,

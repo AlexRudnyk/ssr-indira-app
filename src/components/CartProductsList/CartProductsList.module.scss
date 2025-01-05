@@ -1,5 +1,11 @@
+@use "../../mixins/mixins.scss" as m;
+
 .cartItemsList {
   display: flex;
   flex-direction: column;
   gap: 32px;
+
+  @include m.media_480 {
+    gap: 24px;
+  }
 }

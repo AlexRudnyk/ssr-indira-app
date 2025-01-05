@@ -16,4 +16,8 @@
   max-width: 1176px;
   margin-left: auto;
   margin-right: auto;
+
+  @include m.media_480 {
+    grid-template-columns: 1fr;
+  }
 }

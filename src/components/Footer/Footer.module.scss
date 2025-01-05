@@ -11,4 +11,9 @@
   font-size: 64px;
 
   @include m.brandFont();
+
+  @include m.media_480 {
+    font-size: 48px;
+    line-height: 1;
+  }
 }

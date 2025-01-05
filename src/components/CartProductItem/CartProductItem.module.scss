@@ -11,6 +11,10 @@
 
 .textWrapper {
   width: 600px;
+
+  @include m.media_480 {
+    display: none;
+  }
 }
 
 .title {
@@ -21,6 +25,10 @@
 .image {
   border-radius: 8px;
   margin-right: 32px;
+
+  @include m.media_480 {
+    margin-right: 16px;
+  }
 }
 
 .priceAndQuantityWrapper {
@@ -29,6 +37,12 @@
   gap: 40px;
   margin-left: auto;
   margin-right: 24px;
+
+  @include m.media_480 {
+    flex-direction: column;
+    gap: 8px;
+    // margin-right: 0;
+  }
 }
 
 .quantityControlsWrapper {
@@ -36,9 +50,25 @@
   align-items: center;
   gap: 24px;
   font-size: 20px;
+
+  @include m.media_480 {
+    gap: 8px;
+  }
 }
 
 .quantity {
   width: 32px;
   text-align: center;
+}
+
+.descTrashBin {
+  @include m.media_480 {
+    display: none;
+  }
+}
+
+.mobTrashBin {
+  @media screen and (min-width: 480.02px) {
+    display: none;
+  }
 }

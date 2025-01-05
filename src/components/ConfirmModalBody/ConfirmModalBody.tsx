@@ -14,7 +14,7 @@ type Props = {
 const ConfirmModalBody: FC<Props> = ({ title, onClose, actionHandler }) => {
   return (
     <div className={s.wrapper}>
-      <h2>{title}</h2>
+      <h2 className={s.title}>{title}</h2>
       <div className={s.btnWrapper}>
         <Button type="button" variant="contained" onClick={actionHandler}>
           Confirm

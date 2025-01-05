@@ -1,3 +1,5 @@
+@use "../../mixins/mixins.scss" as m;
+
 .animationWrapper {
   overflow: hidden;
   width: 100%;
@@ -10,6 +12,10 @@
   animation: scroll 30s linear infinite;
   width: calc(200%);
   animation-play-state: running;
+
+  @include m.media_480 {
+    width: calc(400%);
+  }
 }
 
 .list:hover {
@@ -22,5 +28,16 @@
   }
   100% {
     transform: translateX(-50%);
+  }
+}
+
+@include m.media_480 {
+  @keyframes scroll {
+    0% {
+      transform: translateX(25%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
   }
 }

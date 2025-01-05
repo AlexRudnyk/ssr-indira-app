@@ -94,7 +94,7 @@ const CartProductItem: FC<Props> = ({ product }) => {
       <Image src={photoURL} alt="product image" width={90} height={90} className={s.image} />
       <div className={s.textWrapper}>
         <p className={s.title}>{title}</p>
-        <p>{text}</p>
+        <p className={s.text}>{text}</p>
       </div>
       <div className={s.priceAndQuantityWrapper}>
         <p>Price: {price} UAH</p>
@@ -110,10 +110,17 @@ const CartProductItem: FC<Props> = ({ product }) => {
           <IconButton sx={customStyle} onClick={() => handleProductQuantity("increase")}>
             +
           </IconButton>
+          <div className={s.mobTrashBin}>
+            <IconButton sx={customStyle} onClick={() => setIsConfirmActionModalOpen(true)}>
+              <Image src={trashBinIcon} alt="trash bin icon" width={24} height={24} />
+            </IconButton>
+          </div>
         </div>
-        <IconButton sx={customStyle} onClick={() => setIsConfirmActionModalOpen(true)}>
-          <Image src={trashBinIcon} alt="trash bin icon" width={24} height={24} />
-        </IconButton>
+        <div className={s.descTrashBin}>
+          <IconButton sx={customStyle} onClick={() => setIsConfirmActionModalOpen(true)}>
+            <Image src={trashBinIcon} alt="trash bin icon" width={24} height={24} />
+          </IconButton>
+        </div>
       </div>
       <ConfirmActionModal
         title="Do you really want to remove this item?"

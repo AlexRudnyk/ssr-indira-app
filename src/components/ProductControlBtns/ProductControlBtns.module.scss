@@ -1,9 +1,15 @@
+@use "../../mixins/mixins.scss" as m;
+
 .btnWrapper {
   display: flex;
   gap: 48px;
 
   button {
     width: 150px;
+  }
+
+  @include m.media_480 {
+    justify-content: space-between;
   }
 }
 

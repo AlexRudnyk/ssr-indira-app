@@ -1,0 +1,14 @@
+.btnWrapper {
+  display: flex;
+  gap: 48px;
+
+  button {
+    width: 150px;
+  }
+}
+
+.btnsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}

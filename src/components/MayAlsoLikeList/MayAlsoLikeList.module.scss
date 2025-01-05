@@ -1,0 +1,26 @@
+.animationWrapper {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.list {
+  display: flex;
+  gap: 16px;
+  animation: scroll 30s linear infinite;
+  width: calc(200%);
+  animation-play-state: running;
+}
+
+.list:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(50%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

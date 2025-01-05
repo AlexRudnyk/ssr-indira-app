@@ -20,7 +20,7 @@ const ProductItem: FC<Props> = ({ product }) => {
           <Image src={photoURL} alt="product" width={400} height={400} className={s.productImage} />
           <div className={s.productTextWrapper}>
             <p>{title}</p>
-            <p>{text}</p>
+            <p className={s.productItemText}>{text}</p>
           </div>
         </div>
         <p className={s.productPrice}>{price} UAH</p>

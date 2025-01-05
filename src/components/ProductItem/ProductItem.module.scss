@@ -28,7 +28,12 @@
   padding: 8px;
 }
 
+.productItemText {
+  @include m.bodyFont;
+}
+
 .productPrice {
   padding: 8px;
   padding-bottom: 16px;
+  @include m.bodyFont;
 }

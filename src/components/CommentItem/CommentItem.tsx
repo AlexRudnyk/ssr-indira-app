@@ -34,7 +34,7 @@ const CommentItem: FC<Props> = ({ comment }) => {
       <p className={s.userName}>{userName}:</p>
       <p>{text}</p>
       <p className={s.date}>{date}</p>
-      <ReplyComment reply={reply} />
+      {reply && <ReplyComment reply={reply} />}
       {user && user.role === "ADMIN" && (
         <div className={s.adminBtnsWrapper}>
           <IconButton onClick={() => setIsReplyModalOpen(true)}>

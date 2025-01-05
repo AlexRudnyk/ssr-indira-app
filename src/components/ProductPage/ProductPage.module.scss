@@ -2,6 +2,9 @@
 @use "../../styles/vars.scss" as v;
 
 .container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
   min-height: calc(100vh - (v.$headerHeight + v.$footerHeight));
 
   @include m.container();
@@ -24,21 +27,6 @@
 }
 
 .descriptionWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-
-.btnWrapper {
-  display: flex;
-  gap: 48px;
-
-  button {
-    width: 150px;
-  }
-}
-
-.btnsContainer {
   display: flex;
   flex-direction: column;
   gap: 32px;

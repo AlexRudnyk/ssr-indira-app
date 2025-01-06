@@ -10,4 +10,8 @@
 .flexWrapper {
   display: flex;
   gap: 48px;
+
+  @include m.media_480 {
+    flex-direction: column;
+  }
 }

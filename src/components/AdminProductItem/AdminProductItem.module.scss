@@ -9,27 +9,57 @@
   @include m.cardShadow();
 }
 
+.titleAndPriceWrapper {
+  display: flex;
+  width: 100%;
+
+  @include m.media_480 {
+    flex-direction: column;
+  }
+}
+
 .title {
   font-weight: 600;
+
+  @include m.media_480 {
+    font-weight: normal;
+    font-size: 14px;
+  }
 }
 
 .productImage {
   border-radius: 16px;
   margin-right: 32px;
+
+  @include m.media_480 {
+    margin-right: 16px;
+  }
 }
 
 .priceAndBtnBlock {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin-left: auto;
   margin-right: 32px;
+
+  @include m.media_480 {
+    margin-right: 16px;
+    margin-left: 0;
+  }
 }
 
 .productPrice {
-  margin-right: 80px;
+  @include m.media_480 {
+    font-size: 14px;
+  }
 }
 
 .btnWrapper {
   display: flex;
   gap: 24px;
+
+  @include m.media_480 {
+    gap: 16px;
+  }
 }

@@ -10,7 +10,7 @@ const ReplyComment: FC<Props> = ({ reply }) => {
   return (
     <div className={s.reply}>
       <p className={s.adminName}>Indira Soap:</p>
-      <p>{reply}</p>
+      <p className={s.replyText}>{reply}</p>
     </div>
   )
 }

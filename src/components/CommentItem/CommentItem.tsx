@@ -32,7 +32,7 @@ const CommentItem: FC<Props> = ({ comment }) => {
   return (
     <li className={s.commentListItem}>
       <p className={s.userName}>{userName}:</p>
-      <p>{text}</p>
+      <p className={s.text}>{text}</p>
       <p className={s.date}>{date}</p>
       {reply && <ReplyComment reply={reply} />}
       {user && user.role === "ADMIN" && (

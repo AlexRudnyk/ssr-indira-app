@@ -33,19 +33,21 @@ const AdminProductItem: FC<Props> = ({ product }) => {
         height={100}
         className={s.productImage}
       />
-      <div>
-        <p className={s.title}>{title}</p>
-        <p>Comments ({comments.length})</p>
-      </div>
-      <div className={s.priceAndBtnBlock}>
-        <p className={s.productPrice}>{price} UAH</p>
-        <div className={s.btnWrapper}>
-          <IconButton onClick={() => setIsEditModalOpen(true)}>
-            <Image src={pencilIcon} alt="pencil icon" width={24} height={24} />
-          </IconButton>
-          <IconButton onClick={() => setIsConfirmActionModalOpen(true)}>
-            <Image src={trashBinIcon} alt="trash bin icon" width={24} height={24} />
-          </IconButton>
+      <div className={s.titleAndPriceWrapper}>
+        <div>
+          <p className={s.title}>{title}</p>
+          <p className={s.title}>Comments ({comments.length})</p>
+        </div>
+        <div className={s.priceAndBtnBlock}>
+          <p className={s.productPrice}>{price} UAH</p>
+          <div className={s.btnWrapper}>
+            <IconButton onClick={() => setIsEditModalOpen(true)}>
+              <Image src={pencilIcon} alt="pencil icon" width={24} height={24} />
+            </IconButton>
+            <IconButton onClick={() => setIsConfirmActionModalOpen(true)}>
+              <Image src={trashBinIcon} alt="trash bin icon" width={24} height={24} />
+            </IconButton>
+          </div>
         </div>
       </div>
       <Modal open={isEditModalOpen} onClose={() => setIsEditModalOpen(false)}>

@@ -1,0 +1,23 @@
+@use "../../styles/vars.scss" as v;
+
+.customStyle {
+  background-color: v.$primary-color !important;
+
+  &:hover {
+    background-color: #452d16 !important;
+  }
+}
+
+.disabled {
+  background-color: v.$light-grey-color !important;
+}
+
+.outlined {
+  color: v.$primary-color !important;
+  background-color: v.$white-color !important;
+  border-color: v.$primary-color !important;
+
+  &:hover {
+    background-color: #faf1e8 !important;
+  }
+}

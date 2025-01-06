@@ -1,7 +1,6 @@
 "use client"
 
 import { useDispatch } from "react-redux"
-import { Button } from "@mui/material"
 import { Form, Formik, FormikHelpers } from "formik"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -9,6 +8,7 @@ import { useRouter } from "next/navigation"
 import { register } from "@/redux/auth/operations"
 import { AppDispatch } from "@/redux/store"
 
+import CustomMUIButton from "../CustomMUIButton"
 import { CustomTextField } from "../CustomTextField/CustomTextField"
 
 import s from "./RegisterForm.module.scss"
@@ -76,9 +76,7 @@ const RegisterForm = () => {
             type="password"
           />
 
-          <Button variant="contained" type="submit">
-            Submit
-          </Button>
+          <CustomMUIButton title="Submit" type="submit" variant="contained" />
           <div className={s.linkWrapper}>
             <p>
               Already have account? <Link href={routes.login}>Sign In</Link>

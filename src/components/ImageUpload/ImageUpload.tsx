@@ -1,10 +1,10 @@
 "use client"
 
 import React, { FC, useState } from "react"
-import { Button } from "@mui/material"
 import Image from "next/image"
 
 import SuccessImage from "../../../public/images/success-check.png"
+import CustomMUIButton from "../CustomMUIButton"
 
 import s from "./ImageUpload.module.scss"
 
@@ -95,12 +95,19 @@ const ImageUpload: FC<FormikProps> = ({ setFieldValue }) => {
             )}
           </div>
           <div className={s.buttonsWrapper}>
-            <Button type="button" variant="contained" onClick={uploadImage} disabled={isUploaded}>
-              Upload
-            </Button>
-            <Button type="button" variant="contained" onClick={handleResetClick}>
-              Reset
-            </Button>
+            <CustomMUIButton
+              title="Upload"
+              type="button"
+              variant="contained"
+              handleClick={uploadImage}
+              disabled={isUploaded}
+            />
+            <CustomMUIButton
+              title="Reset"
+              type="button"
+              variant="contained"
+              handleClick={handleResetClick}
+            />
           </div>
         </div>
       )}

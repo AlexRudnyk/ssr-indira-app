@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
-import { Button, Modal } from "@mui/material"
+import { Modal } from "@mui/material"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
@@ -10,6 +10,7 @@ import { clearCart } from "@/redux/auth/operations"
 import { AppDispatch } from "@/redux/store"
 
 import CartProductsList from "../CartProductsList"
+import CustomMUIButton from "../CustomMUIButton"
 import OrderModal from "../OrderModal"
 
 import s from "./CartPage.module.scss"
@@ -98,9 +99,12 @@ const CartPage = () => {
               Your order total amount is:{" "}
               <span className={s.totalSum}>{isLoggedIn ? totalSumDB : totalSum}</span> UAH
             </p>
-            <Button type="button" variant="contained" onClick={handleOrderClick}>
-              Make order
-            </Button>
+            <CustomMUIButton
+              title="Make order"
+              type="button"
+              variant="contained"
+              handleClick={handleOrderClick}
+            />
           </div>
         </div>
       )}

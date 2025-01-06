@@ -1,8 +1,8 @@
 "use client"
 
-import { Button } from "@mui/material"
 import { Form, Formik, FormikHelpers } from "formik"
 
+import CustomMUIButton from "../CustomMUIButton"
 import { CustomTextField } from "../CustomTextField/CustomTextField"
 import ImageUpload from "../ImageUpload/ImageUpload"
 
@@ -55,9 +55,7 @@ const AddProductForm = () => {
             }}
           />
 
-          <Button type="submit" variant="contained">
-            Submit
-          </Button>
+          <CustomMUIButton title="Submit" type="submit" variant="contained" />
         </Form>
       )}
     </Formik>

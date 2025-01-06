@@ -1,5 +1,6 @@
 import { FC } from "react"
-import { Button } from "@mui/material"
+
+import CustomMUIButton from "../CustomMUIButton"
 
 import s from "./ConfirmModalBody.module.scss"
 
@@ -16,12 +17,13 @@ const ConfirmModalBody: FC<Props> = ({ title, onClose, actionHandler }) => {
     <div className={s.wrapper}>
       <h2 className={s.title}>{title}</h2>
       <div className={s.btnWrapper}>
-        <Button type="button" variant="contained" onClick={actionHandler}>
-          Confirm
-        </Button>
-        <Button type="button" variant="contained" onClick={onClose}>
-          Cancel
-        </Button>
+        <CustomMUIButton
+          title="Confirm"
+          type="button"
+          variant="contained"
+          handleClick={actionHandler}
+        />
+        <CustomMUIButton title="Cancel" type="button" variant="contained" handleClick={onClose} />
       </div>
     </div>
   )

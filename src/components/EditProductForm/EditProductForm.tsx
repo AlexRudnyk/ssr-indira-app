@@ -1,7 +1,7 @@
 import { FC } from "react"
-import { Button } from "@mui/material"
 import { Form, Formik } from "formik"
 
+import CustomMUIButton from "../CustomMUIButton"
 import { CustomTextField } from "../CustomTextField/CustomTextField"
 
 import s from "./EditProductForm.module.scss"
@@ -63,9 +63,7 @@ const EditProductForm: FC<Props> = ({ onClose, product }) => {
             }}
           />
 
-          <Button type="submit" variant="contained">
-            Submit
-          </Button>
+          <CustomMUIButton title="Submit" type="submit" variant="contained" />
         </Form>
       </Formik>
     </div>

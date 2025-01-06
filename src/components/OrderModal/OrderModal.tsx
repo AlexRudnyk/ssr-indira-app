@@ -1,9 +1,9 @@
 "use client"
 
 import { FC, SetStateAction } from "react"
-import { Button } from "@mui/material"
 import { Form, Formik } from "formik"
 
+import CustomMUIButton from "../CustomMUIButton"
 import { CustomTextField } from "../CustomTextField/CustomTextField"
 
 import s from "./OrderModal.module.scss"
@@ -54,9 +54,7 @@ const OrderModal: FC<Props> = ({ onOrderSubmit }) => {
             type="email"
           />
 
-          <Button variant="contained" type="submit">
-            Order
-          </Button>
+          <CustomMUIButton title="Order" type="submit" variant="contained" />
         </Form>
       </Formik>
     </div>

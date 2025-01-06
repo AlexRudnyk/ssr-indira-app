@@ -50,8 +50,11 @@
 }
 
 .productPrice {
+  margin-right: 48px;
+
   @include m.media_480 {
     font-size: 14px;
+    margin-right: 0;
   }
 }
 

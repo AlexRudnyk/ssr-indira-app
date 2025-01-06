@@ -1,9 +1,9 @@
 "use client"
 
 import { FC } from "react"
-import { Button } from "@mui/material"
 import { Form, Formik } from "formik"
 
+import CustomMUIButton from "../CustomMUIButton"
 import { CustomTextField } from "../CustomTextField/CustomTextField"
 
 import s from "./CommentsForm.module.scss"
@@ -41,9 +41,7 @@ const CommentsForm: FC<Props> = ({ productId, onClose }) => {
             multiline
             maxRows={4}
           />
-          <Button variant="contained" type="submit">
-            Submit
-          </Button>
+          <CustomMUIButton title="Comment" type="submit" variant="contained" />
         </Form>
       </Formik>
     </div>

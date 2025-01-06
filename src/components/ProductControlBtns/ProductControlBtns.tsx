@@ -3,13 +3,14 @@
 import { FC, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { toast } from "react-toastify"
-import { Button, Modal } from "@mui/material"
+import { Modal } from "@mui/material"
 import Link from "next/link"
 
 import { addToCart } from "@/redux/auth/operations"
 import { AppDispatch } from "@/redux/store"
 
 import CommentsForm from "../CommentsForm"
+import CustomMUIButton from "../CustomMUIButton"
 
 import s from "./ProductControlBtns.module.scss"
 
@@ -84,34 +85,33 @@ const ProductControlBtns: FC<Props> = ({
     <div className={s.btnsContainer}>
       <div className={s.btnWrapper}>
         {user?.role !== "ADMIN" && (
-          <Button
+          <CustomMUIButton
+            title="Add to Cart"
             type="button"
             variant="contained"
-            onClick={handleAddToCartClick}
+            handleClick={handleAddToCartClick}
             disabled={isAddedToCart}
-          >
-            Add to Cart
-          </Button>
+          />
         )}
         <Link href={routes.home}>
-          <Button type="button" variant="contained">
-            Back to Home
-          </Button>
+          <CustomMUIButton title="Back to Home" type="button" variant="contained" />
         </Link>
       </div>
       <div className={s.btnWrapper}>
-        <Button
+        <CustomMUIButton
+          title={`Comments (${comments?.length})`}
           type="button"
           variant="outlined"
-          onClick={() => setIsCommentsListOpen(!isCommentsListOpen)}
+          handleClick={() => setIsCommentsListOpen(!isCommentsListOpen)}
           disabled={comments?.length === 0}
-        >
-          Comments ({comments?.length})
-        </Button>
+        />
         {user?.role !== "ADMIN" && (
-          <Button type="button" variant="outlined" onClick={handleAddCommentClick}>
-            Add Comment
-          </Button>
+          <CustomMUIButton
+            title=" Add Comment"
+            type="button"
+            variant="outlined"
+            handleClick={handleAddCommentClick}
+          />
         )}
         <Modal open={isAddCommentModalOpen} onClose={() => setIsAddCommentModalOpen(false)}>
           <CommentsForm productId={productId} onClose={() => setIsAddCommentModalOpen(false)} />

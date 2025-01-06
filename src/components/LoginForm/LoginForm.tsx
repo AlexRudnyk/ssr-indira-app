@@ -1,13 +1,13 @@
 "use client"
 
 import { useDispatch } from "react-redux"
-import Button from "@mui/material/Button"
 import { Form, Formik, FormikHelpers } from "formik"
 import Link from "next/link"
 
 import { login } from "@/redux/auth/operations"
 import { AppDispatch } from "@/redux/store"
 
+import CustomMUIButton from "../CustomMUIButton"
 import { CustomTextField } from "../CustomTextField/CustomTextField"
 
 import s from "./LoginForm.module.scss"
@@ -52,9 +52,7 @@ const LoginForm = () => {
             type="password"
           />
 
-          <Button variant="contained" type="submit">
-            Submit
-          </Button>
+          <CustomMUIButton title="Submit" type="submit" variant="contained" />
           <div className={s.linkWrapper}>
             <p>
               Don&#39;t have account yet? <Link href={routes.register}>Sign Up</Link>

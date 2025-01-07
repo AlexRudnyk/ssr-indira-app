@@ -55,7 +55,7 @@ export const cartApi = {
 
   sendOrder: async (mailBody: MailBody) => {
     try {
-      await axiosInstance.post(`order`, mailBody)
+      await axiosInstance.post("order", mailBody)
     } catch (error: any) {
       const errorMessage = error.response?.data?.message || "Failed to send order to email"
       throw new Error(errorMessage)
